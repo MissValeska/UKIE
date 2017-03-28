@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/MissValeska/UKIE/issues"
   },
-  "homepage": "https://github.com/MissValeska/UKIE#readme"
+  "homepage": "https://github.com/MissValeska/UKIE#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
 }

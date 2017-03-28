@@ -10,22 +10,29 @@ var connection = mysql.createConnection({
 // Look into escaping all variables used with mysql in this file
 
 
-function checkConjugations (слова, sectNum) {
+function checkConjugations (слово, infinitive, sectNum) {
     connection.connect();
 
-    слова = слова.toLowerCase();
+    слово = слово.toLowerCase();
 
-    connection.query('SELECT ' + sectNum + ' FROM conjugations WHERE слови =' + слова, function(err, rows, fields) {
+    connection.query('SELECT ' + sectNum + ' FROM conjugations-answers WHERE слова =' + infinitive, function(err, rows, fields) {
+    if (!err)
+        answerKey = rows;
+    else
+        console.log('Error while performing Query.');
+    });
+
+    connection.query('SELECT ' + answerKey + ' FROM conjugations-data WHERE слова =' + infinitive, function(err, rows, fields) {
     if (!err) {
         if (rows.length >= 2) {
             for (var i = 0; i < rows.length; i++) {
-                if(слова === rows[i].toLowerCase()) {
+                if(слово === rows[i].toLowerCase()) {
                     return true;
                 }
             }
             return rows;
         }
-        else if (слова === rows.toLowerCase()) {
+        else if (слово === rows.toLowerCase()) {
             return true;
         }
         return rows;

@@ -1,0 +1,34 @@
+{
+  "name": "ukie",
+  "version": "0.0.0",
+  "description": "A language learning platform, specifically for Ukrainian, combining elements of Duolingo, HelloTalk, FluentU, and more, along with specific grammar lessons, readings and even cultural lessons in order to ensure a complete and wholesome acquistion of the language and culture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MissValeska/UKIE.git"
+  },
+  "keywords": [
+    "language learning",
+    "duolingo",
+    "fluentu",
+    "hellotalk",
+    "ukraine",
+    "ukrainian",
+    "україна",
+    "learn",
+    "ukrainian",
+    "language",
+    "aquisition",
+    "cultural",
+    "assimiliation"
+  ],
+  "author": "Gabriela Medvetska and Valeska Victoria",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/MissValeska/UKIE/issues"
+  },
+  "homepage": "https://github.com/MissValeska/UKIE#readme"
+}

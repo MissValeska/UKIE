@@ -11,6 +11,10 @@ app.get('/success', function (req, res) {
   res.sendFile(__dirname + "/success.html")
 })
 
+app.get('/modules', function (req, res) {
+  res.sendFile(__dirname + "/modules.html")
+})
+
 app.get('/tos', function (req, res) {
   res.send("Nothing!");
 })

@@ -10,6 +10,11 @@
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
 </head>
 <body>
+
+  <p id="dataStore"></p>
+  <h1>Welcome to My Awesome App</h1>
+  <div id="firebaseui-auth-container"></div>
+
   <script>
     // Initialize Firebase
     var config = {
@@ -22,6 +27,15 @@
     };
     firebase.initializeApp(config);
 
+    // Get a reference to the database service
+    var database = firebase.database();
+
+    firebase.database().ref('Modules').once('value').then(function(snapshot) {
+      var username = snapshot.val().ModuleNum;
+      console.log("Yo man!" + username);
+      document.getElementById('dataStore').innerHTML = "Yo man!" + username;
+      // ...
+    });
 
     // FirebaseUI config.
     var uiConfig = {
@@ -45,9 +59,6 @@
     ui.start('#firebaseui-auth-container', uiConfig);
 
   </script>
-
-  <h1>Welcome to My Awesome App</h1>
-  <div id="firebaseui-auth-container"></div>
 
 </body>
 </html>

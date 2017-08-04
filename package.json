@@ -1,0 +1,31 @@
+{
+  "name": "ukie",
+  "version": "1.0.0",
+  "description": "An application to learn the Ukrainian language",
+  "main": "app.js",
+  "scripts": {
+    "start": "babel-node app.js --presets es2015,stage-2",
+    "test": "node app.js"
+  },
+  "author": "Valeska Victoria & Gabriela Medvetska",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "es6": "0.0.7",
+    "express": "^4.15.3",
+    "firebaseui": "^2.3.0",
+    "fs": "0.0.1-security",
+    "html": "^1.0.0"
+},
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
+    "vinyl-source-stream": "^1.1.0"
+
+  }
+}

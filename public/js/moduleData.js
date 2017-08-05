@@ -1,5 +1,5 @@
 function getModuleData() {
-const UKIE_ADDRESS = "localhost:3000/";
+const UKIE_ADDRESS = "http://localhost:3000/";
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyBpa4RgteIADz8jvF-OkQLBwqg7a-DjIsY",

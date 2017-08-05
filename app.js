@@ -1,26 +1,30 @@
 const express = require('express')
+const fs = require('fs');
+var path = require('path');
 const app = express()
 
 app.set('port', (process.env.PORT || 3000));
 
+app.use(express.static(path.join(__dirname, '/public')));
+
 app.get('/', function (req, res) {
-  res.sendFile(__dirname +  "/client/index.html")
+  res.sendFile(__dirname +  "/public/views/index.html")
 })
 
 app.get('/success', function (req, res) {
-  res.sendFile(__dirname + "/client/success.html")
+  res.sendFile(__dirname + "/public/views/success.html")
 })
 
 app.get('/modules', function (req, res) {
-  res.sendFile(__dirname + "/client/modules.html")
+  res.sendFile(__dirname + "/public/views/modules.html")
 })
 
 app.get('/module/:modNum', function (req, res) {
-  res.sendFile(__dirname + "/client/exercises.html")
+  res.sendFile(__dirname + "/public/views/exercises.html")
 })
 
 app.get('/module/:modNum/exercise/:excNum', function (req, res) {
-  res.sendFile(__dirname + "/client/questionblock.html")
+  res.sendFile(__dirname + "/public/views/questionblock.html")
 })
 
 app.get('/tos', function (req, res) {

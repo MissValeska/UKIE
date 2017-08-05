@@ -15,6 +15,14 @@ app.get('/modules', function (req, res) {
   res.sendFile(__dirname + "/modules.html")
 })
 
+app.get('/module/:modNum', function (req, res) {
+  res.sendFile(__dirname + "/exercises.html")
+})
+
+app.get('/module/:modNum/exercise/:excNum', function (req, res) {
+  res.sendFile(__dirname + "/questionblock.html")
+})
+
 app.get('/tos', function (req, res) {
   res.send("Nothing!");
 })

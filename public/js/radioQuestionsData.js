@@ -23,24 +23,59 @@ function getRadioQuestionsData() {
     var num = snapshot.val().QuestionNum;
 
       firebase.database().ref("Modules/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock).once('value').then(function(snapshot) {
-        for(var i = 1; i <= num; i++) {
+        //for(var i = 1; i <= num; i++) {
           console.log("In!")
-          var url = snapshot.child("Question" + i).val().url;
-          var text = snapshot.child("Question" + i).val().text;
+          var correctAnswer = snapshot.child("Question" + i).val().correctAnswer;
+          var questionText = snapshot.child("Question" + i).val().questionText;
+          var radioText1 = snapshot.child("Question" + i).val().radioText1;
+          var radioText2 = snapshot.child("Question" + i).val().radioText2;
+          var radioText3 = snapshot.child("Question" + i).val().radioText3;
+          var radioText4 = snapshot.child("Question" + i).val().radioText4;
+          var type = snapshot.child("Question" + i).val().type;
+          var radioAudio = snapshot.child("Question" + i).val().radioAudio;
+          var letter = snapshot.child("Question" + i).val().letter;
+          var isWord = snapshot.child("Question" + i).val().isWord;
+
           var node = document.createElement("li");              // Create a <li> node
-          var imgnode = document.createElement("img"); 
-          var linknode = document.createElement("a");                
+          var imgnode = document.createElement("img");
+          var formnode = document.createElement("form");
+           
+          var radionode1 = document.createElement("radio");   
+          radionode1.setAttribute("name", "qStuff");  
+          radionode1.setAttribute("value", radioText1);
+          var radionode2 = document.createElement("radio");   
+          radionode2.setAttribute("name", "qStuff");  
+          radionode2.setAttribute("value", radioText2);
+          var radionode3 = document.createElement("radio");   
+          radionode3.setAttribute("name", "qStuff");  
+          radionode3.setAttribute("value", radioText3);
+          var radionode4 = document.createElement("radio");   
+          radionode4.setAttribute("name", "qStuff");  
+          radionode4.setAttribute("value", radioText4);
+
+          formnode.setAttribute("action", "");
+          formnode.setAttribute("id", "radioForm");
+          formnode.appendChild(radionode1);
+          formnode.appendChild(radionode2);
+          formnode.appendChild(radionode3);
+          formnode.appendChild(radionode4);
+                      
           imgnode.setAttribute("src", url);
-          linknode.setAttribute("href", UKIE_ADDRESS + "module/" + currentModule + "/exercise/" + i + "/questionblock/" + i);
-          linknode.appendChild(imgnode);
-          var textnode = document.createElement("p");         // Create a text node
-          textnode.innerHTML = text;
-          node.appendChild(linknode);
-          node.appendChild(textnode);                              // Append the text to <li>
-          node.id = "QuestionBlock" + i;
+          node.appendChild(linknode);                        // Append the text to <li>
+          node.id = "Question" + i;
           document.getElementById("dataStore").appendChild(node);     // Append <li> to <ul> with id="dataStore"
           // ...
-        }
+
+        $('#radioForm').submit(function(e){
+          e.preventDefault();
+          console.log("submited!");
+          var radioText = $("#radioForm").val();
+          console.log("RadioText:" + radioText);
+          //saveProfileData(totalData);
+          //window.location.replace("http://localhost:3000/results");
+        });
+
+        //}
       });
   });
 

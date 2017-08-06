@@ -27,6 +27,10 @@ app.get('/module/:modNum/exercise/:excNum', function (req, res) {
   res.sendFile(__dirname + "/public/views/questionblock.html")
 })
 
+app.get('/module/:modNum/exercise/:excNum/questionblock/:qBlockNum/question/:qNum', function (req, res) {
+  res.sendFile(__dirname + "/public/views/question.html")
+})
+
 app.get('/tos', function (req, res) {
   res.send("Nothing!");
 })

@@ -29,7 +29,7 @@ function getQuestionBlockData() {
           var imgnode = document.createElement("img"); 
           var linknode = document.createElement("a");                
           imgnode.setAttribute("src", url);
-          linknode.setAttribute("href", UKIE_ADDRESS + "module/" + currentModule + "/exercise/" + i + "/questionblock/" + i);
+          linknode.setAttribute("href", UKIE_ADDRESS + "module/" + currentModule + "/exercise/" + i + "/questionblock/" + i + "/question/1");
           linknode.appendChild(imgnode);
           var textnode = document.createElement("p");         // Create a text node
           textnode.innerHTML = text;

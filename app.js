@@ -1,40 +1,55 @@
 const express = require('express')
 const fs = require('fs');
 var path = require('path');
-const app = express()
+const app = express();
 
 app.set('port', (process.env.PORT || 3000));
 
-app.use(express.static(path.join(__dirname, '/public')));
+// set up static files
+app.use(express.static(path.join(__dirname, '/public/static')));
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname +  "/public/views/index.html")
-})
+
+// set up views
+app.use(express.static(__dirname + '/views'));
+app.set('view engine', 'pug');
+
+// show the home page (will also have our login links)
+app.get('/', function(req, res) {
+res.render('index')
+});
 
 app.get('/success', function (req, res) {
-  res.sendFile(__dirname + "/public/views/success.html")
-})
+res.render('success')
+});
+
+app.get('/profile', function (req, res) {
+res.render('profile')
+});
+
+app.get('/results', function (req, res) {
+res.render('results')
+});
 
 app.get('/modules', function (req, res) {
-  res.sendFile(__dirname + "/public/views/modules.html")
-})
+  res.render('modules')
+});
 
 app.get('/module/:modNum', function (req, res) {
-  res.sendFile(__dirname + "/public/views/exercises.html")
-})
+  res.render('exercises')
+});
 
 app.get('/module/:modNum/exercise/:excNum', function (req, res) {
-  res.sendFile(__dirname + "/public/views/questionblock.html")
-})
+res.render('questionblock')
+});
 
 app.get('/module/:modNum/exercise/:excNum/questionblock/:qBlockNum/question/:qNum', function (req, res) {
-  res.sendFile(__dirname + "/public/views/question.html")
-})
+res.render('question')
+});
 
 app.get('/tos', function (req, res) {
   res.send("Nothing!");
-})
+});
 
 app.listen(app.get('port'), function () {
   console.log('Example app listening on port 3000')
-})
+});

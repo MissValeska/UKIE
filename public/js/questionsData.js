@@ -31,11 +31,11 @@ function findCorrectType() {
       var type = snapshot.child("Question" + currentQuestion).val().type;
       if(type.includes("radio") == true) {
         console.log("This is a radio question!");
-        getRadioQuestionsData();
+        getRadioQuestionsData(num, snapshot, currentQuestion, currentPathname);
       }
       else if(type == "dropdown") {
         console.log("This is a dropdown question!");
-        getdropdownData();
+        getdropdownData(num, snapshot, currentQuestion, currentPathname);
       }
     });
   }
@@ -46,30 +46,152 @@ function findCorrectType() {
 
 }
 
-function getdropdownData() {
+function getdropdownData(num, snapshot, currentQuestion, currentPathname) {
 
-  
+  var i = currentQuestion;
+  var correctAnswer = snapshot.child("Question" + i).val().correctAnswer;
+  var questionText = snapshot.child("Question" + i).val().questionText;
+  var dropDown1 = snapshot.child("Question" + i).val().dropDown1;
+  var dropDown2 = snapshot.child("Question" + i).val().dropDown2;
+  var questionText1 = snapshot.child("Question" + i).val().questionText1;
+  var type = snapshot.child("Question" + i).val().type;
+  /*var radioAudio = snapshot.child("Question" + i).val().radioAudio;
+  var letter = snapshot.child("Question" + i).val().letter;
+  var isWord = snapshot.child("Question" + i).val().isWord;*/
+
+  if(type.includes("radio") == false) {
+    console.log("Not a radio question!");
+  }
+
+  var arrayText = [dropDown1, dropDown2];
+  var correctText = arrayText[correctAnswer-1];
+
+  //var node = document.createElement("div");              // Create a <li> node
+  //var imgnode = document.createElement("img");
+  //var formnode = document.createElement("form");
+  //var audionode = document.createElement("audio");
+
+  var h1node = document.createElement("h1");
+
+  var pnode = document.createElement("p");
+
+  var submitbtn = document.createElement("button");
+  submitbtn.setAttribute("type", "button");
+  submitbtn.setAttribute("id", "nextBtn");
+  submitbtn.innerHTML = "Check";
+
+  var dropDown = document.createElement("select");
+  dropDown.setAttribute("id", "dropdown");
+
+  var option1 = document.createElement("option");
+  var option2 = document.createElement("option");
+
+  option1.setAttribute("value", dropDown1);
+  option1.setAttribute("id", "dropdown1");
+  option1.innerHTML = dropDown1;
+
+  option2.setAttribute("value", dropDown2);
+  option2.setAttribute("id", "dropdown2");
+  option2.innerHTML = dropDown2;
+
+  dropDown.appendChild(option1);
+  dropDown.appendChild(option2);
+
+  /*var label1 = document.createElement("label");
+  label1.setAttribute("class", "block");
+  label1.innerHTML = radioText1;
+  var label2 = document.createElement("label");
+  label2.setAttribute("class", "block");
+  label2.innerHTML = radioText2;
+  var label3 = document.createElement("label");
+  label3.setAttribute("class", "block");
+  label3.innerHTML = radioText3;
+  var label4 = document.createElement("label");
+  label4.setAttribute("class", "block");
+  label4.innerHTML = radioText4;
+
+  var radionode1 = document.createElement("input");
+  radionode1.setAttribute("type", "radio");    
+  radionode1.setAttribute("name", "qStuff");
+  radionode1.setAttribute("id", "radio1");  
+  radionode1.setAttribute("value", radioText1);
+  var radionode2 = document.createElement("input");
+  radionode2.setAttribute("type", "radio");    
+  radionode2.setAttribute("name", "qStuff");
+  radionode2.setAttribute("id", "radio2");  
+  radionode2.setAttribute("value", radioText2);
+  var radionode3 = document.createElement("input");  
+  radionode3.setAttribute("type", "radio");  
+  radionode3.setAttribute("name", "qStuff");
+  radionode3.setAttribute("id", "radio3");  
+  radionode3.setAttribute("value", radioText3);
+  var radionode4 = document.createElement("input");
+  radionode4.setAttribute("type", "radio");     
+  radionode4.setAttribute("name", "qStuff");
+  radionode4.setAttribute("id", "radio4");  
+  radionode4.setAttribute("value", radioText4);
+
+  formnode.setAttribute("action", "");
+  formnode.setAttribute("id", "radioForm");
+  label1.appendChild(radionode1);
+  label2.appendChild(radionode2);
+  label3.appendChild(radionode3);
+  label4.appendChild(radionode4);
+  formnode.appendChild(label1);
+  formnode.appendChild(label2);
+  formnode.appendChild(label3);
+  formnode.appendChild(label4);
+
+  audionode.setAttribute("src", radioAudio);
+  audionode.setAttribute("type", "audio/mpeg");
+  audionode.setAttribute("controls", "controls");*/
+
+  h1node.innerHTML = questionText;
+  pnode.innerHTML = questionText1;
+
+  //imgnode.setAttribute("src", url);
+  //node.appendChild(imgnode);                        // Append the text to <li>
+  //node.appendChild(formnode);
+  //node.id = "Question" + i;
+  document.getElementById("dataDiv").appendChild(h1node);
+  document.getElementById("dataDiv").appendChild(pnode);
+  document.getElementById("dataDiv").appendChild(dropDown);
+  //document.getElementById("dataDiv").appendChild(audionode);
+  //document.getElementById("dataDiv").appendChild(formnode);     // Append <li> to <ul> with id="dataStore"
+  document.getElementById("dataDiv").appendChild(submitbtn);
+  // ...
+
+$('#nextBtn').click(function(e){
+  e.preventDefault();
+  if(document.getElementById('nextBtn').innerHTML == "Next") {
+    console.log(currentPathname.slice(0, -1));
+    if((parseInt(currentQuestion) + 1) != num) {
+      window.location.replace("http://localhost:3000" + currentPathname.slice(0, -1) + (parseInt(currentQuestion) + 1));
+    }
+    else {
+      window.location.replace("http://localhost:3000/success");
+    }
+  }
+  else {
+    console.log("submited!");
+    var omg = $('#dropdown').find(":selected").text();
+    console.log("Omg!" + omg);
+    if(omg == correctText) {
+      console.log("You're correct!");
+      document.getElementById('nextBtn').innerHTML = 'Next';
+    }
+    else {
+      console.log("Incorrect, please try again.")
+    }
+}
+  //saveProfileData(totalData);
+  //window.location.replace("http://localhost:3000/results");
+});
 
 }
 
-function getRadioQuestionsData() {
+function getRadioQuestionsData(num, snapshot, currentQuestion, currentPathname) {
 
-  var currentPathname = window.location.pathname;
-  console.log(currentPathname);
-  var currentModule = currentPathname.split("module/")[1];
-  currentModule = currentModule.split("/exercise")[0];
-  var currentExercise = currentPathname.split("exercise/")[1];
-  currentExercise = currentExercise.split("/questionblock")[0];
-  var currentQuestionBlock = currentPathname.split("questionblock/")[1];
-  currentQuestionBlock = currentQuestionBlock.split("/question")[0];
-  var currentQuestion = currentPathname.split("question/")[1];
-
-  firebase.database().ref('Modules/Module' + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock).once('value').then(function(snapshot) {
-    var num = snapshot.val().QuestionNum;
-    console.log("Num:" + num);
-
-      firebase.database().ref("Modules/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock).once('value').then(function(snapshot) {
-        //for(var i = 1; i <= num; i++) {
           var i = currentQuestion;
           var correctAnswer = snapshot.child("Question" + i).val().correctAnswer;
           var questionText = snapshot.child("Question" + i).val().questionText;
@@ -188,10 +310,6 @@ function getRadioQuestionsData() {
           //saveProfileData(totalData);
           //window.location.replace("http://localhost:3000/results");
         });
-
-        //}
-      });
-  });
 
 
 }

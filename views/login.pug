@@ -43,7 +43,7 @@ html(lang='en')
               button#facebook.btn.btn-facebook(type='submit')
                 i.fa.fa-facebook
                 |  Facebook
-              button.btn.btn-twitter(type='submit')
+              button#twitter.btn.btn-twitter(type='submit')
                 i.fa.fa-twitter
                 |  Twitter
               button#google.btn.btn-google(type='submit')
@@ -89,5 +89,9 @@ html(lang='en')
       $('#facebook').click(function(e) {
         e.preventDefault();
         chooseProvider(1);
+      });
+      $('#twitter').click(function(e) {
+        e.preventDefault();
+        chooseProvider(2);
       });
       $.backstretch("/img/login-bg.jpg", {speed: 500});

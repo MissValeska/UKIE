@@ -10,20 +10,41 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var userData;
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    console.log("Username:" + user.displayName);
+    userData = user;
+  } else {
+    console.log("not signed in!")
+    //login();
+    // No user is signed in.
+  }
+});
+
+var currentPathname;
+var currentModule;
+var currentExercise;
+var currentQuestionBlock;
+var currentQuestion;
+var num;
+
 function findCorrectType() {
 
-  var currentPathname = window.location.pathname;
+  currentPathname = window.location.pathname;
   console.log(currentPathname);
-  var currentModule = currentPathname.split("module/")[1];
+  currentModule = currentPathname.split("module/")[1];
   currentModule = currentModule.split("/exercise")[0];
-  var currentExercise = currentPathname.split("exercise/")[1];
+  currentExercise = currentPathname.split("exercise/")[1];
   currentExercise = currentExercise.split("/questionblock")[0];
-  var currentQuestionBlock = currentPathname.split("questionblock/")[1];
+  currentQuestionBlock = currentPathname.split("questionblock/")[1];
   currentQuestionBlock = currentQuestionBlock.split("/question")[0];
-  var currentQuestion = currentPathname.split("question/")[1];
+  currentQuestion = currentPathname.split("question/")[1];
 
   firebase.database().ref('Modules/Module' + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock).once('value').then(function(snapshot) {
-    var num = snapshot.val().QuestionNum;
+    num = snapshot.val().QuestionNum;
     console.log("Num:" + num);
 
     if(currentQuestion <= num) {
@@ -31,11 +52,11 @@ function findCorrectType() {
       var type = snapshot.child("Question" + currentQuestion).val().type;
       if(type.includes("radio") == true) {
         console.log("This is a radio question!");
-        getRadioQuestionsData(num, snapshot, currentQuestion, currentPathname);
+        getRadioQuestionsData(num, snapshot);
       }
       else if(type == "dropdown") {
         console.log("This is a dropdown question!");
-        getdropdownData(num, snapshot, currentQuestion, currentPathname);
+        getdropdownData(num, snapshot);
       }
     });
   }
@@ -46,7 +67,129 @@ function findCorrectType() {
 
 }
 
-function getdropdownData(num, snapshot, currentQuestion, currentPathname) {
+const QUESTION = 0;
+const QUESTIONBLOCK = 1;
+const EXERCISE = 2;
+const MODULE = 3;
+
+function markAsCompleted(i) {
+
+  if(i == QUESTION) {
+    firebase.database().ref('users/' + userData.uid + "/Module" + currentModule + "Exercise" + currentExercise + "QuestionBlock" + currentQuestionBlock + "Question" + currentQuestion + "CompletedQuestion").set(true);
+  }
+
+  if(i == QUESTIONBLOCK) {
+    firebase.database().ref('users/' + userData.uid + "/Module" + currentModule + "Exercise" + currentExercise + "QuestionBlock" + currentQuestionBlock + "CompletedQuestionBlock").set(true);
+  }
+
+  if(i == EXERCISE) {
+    firebase.database().ref('users/' + userData.uid + "/Module" + currentModule + "Exercise" + currentExercise + "CompletedExercise").set(true);
+  }
+
+  if(i == MODULE) {
+    firebase.database().ref('users/' + userData.uid + "/Module" + currentModule + "CompletedModule").set(true);
+  }
+
+}
+
+function addCorrect() {
+
+  var correctCount = 0;
+
+  firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).once('value').then(function(snapshot) {
+    try {
+      correctCount = snapshot.val().correct;
+      console.log("CorrectCount:" + correctCount);
+    }
+    catch(err) {
+      console.log(err.message);
+    }
+
+    firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).update({
+      correct: correctCount + 1
+    });
+});
+
+}
+
+function addIncorrect() {
+
+  var incorrectCount = 0;
+
+  firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).once('value').then(function(snapshot) {
+    try {
+      incorrectCount = snapshot.val().incorrect;
+      console.log("IncorrectCount:" + incorrectCount);
+    }
+    catch(err) {
+      console.log(err.message);
+    }
+
+    firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).update({
+      incorrect: incorrectCount + 1
+    });
+});
+
+}
+
+const RADIO = 0;
+const DROPDOWN = 1;
+
+function submitBtnClicked(correctText, correctAnswer, i) {
+
+  $('#nextBtn').click(function(e){
+    e.preventDefault();
+    if(document.getElementById('nextBtn').innerHTML == "Next") {
+      markAsCompleted(0);
+      console.log(currentPathname.slice(0, -1));
+      if((parseInt(currentQuestion) + 1) != num) {
+        window.location.replace("http://localhost:3000" + currentPathname.slice(0, -1) + (parseInt(currentQuestion) + 1));
+      }
+      else {
+        markAsCompleted(1);
+        // Check if this is the end of an exericse and or module as well, and record that
+        window.location.replace("http://localhost:3000/success");
+      }
+    }
+    else {
+      console.log("submited!");
+      var omg;
+      if(i == RADIO) {
+        omg = $("input[type=radio]#radio" + correctAnswer).is(":checked");
+      }
+      else if(i == DROPDOWN) {
+        omg = $('#dropdown').find(":selected").text();
+      }
+      console.log("Omg!" + omg);
+      var tmp;
+      if(i == RADIO) {
+        tmp = omg;
+      }
+      else if(i == DROPDOWN) {
+        if(omg == correctText) {
+          tmp = true;
+        }
+        else {
+          tmp = false;
+        }
+      }
+      if(tmp) {
+        console.log("You're correct!");
+        document.getElementById('nextBtn').innerHTML = 'Next';
+        addCorrect();
+      }
+      else {
+        console.log("Incorrect, please try again.");
+        addIncorrect();
+      }
+  }
+    //saveProfileData(totalData);
+    //window.location.replace("http://localhost:3000/results");
+  });
+
+}
+
+function getdropdownData(num, snapshot) {
 
   var i = currentQuestion;
   var correctAnswer = snapshot.child("Question" + i).val().correctAnswer;
@@ -161,36 +304,11 @@ function getdropdownData(num, snapshot, currentQuestion, currentPathname) {
   document.getElementById("dataDiv").appendChild(submitbtn);
   // ...
 
-$('#nextBtn').click(function(e){
-  e.preventDefault();
-  if(document.getElementById('nextBtn').innerHTML == "Next") {
-    console.log(currentPathname.slice(0, -1));
-    if((parseInt(currentQuestion) + 1) != num) {
-      window.location.replace("http://localhost:3000" + currentPathname.slice(0, -1) + (parseInt(currentQuestion) + 1));
-    }
-    else {
-      window.location.replace("http://localhost:3000/success");
-    }
-  }
-  else {
-    console.log("submited!");
-    var omg = $('#dropdown').find(":selected").text();
-    console.log("Omg!" + omg);
-    if(omg == correctText) {
-      console.log("You're correct!");
-      document.getElementById('nextBtn').innerHTML = 'Next';
-    }
-    else {
-      console.log("Incorrect, please try again.")
-    }
-}
-  //saveProfileData(totalData);
-  //window.location.replace("http://localhost:3000/results");
-});
+  submitBtnClicked(correctText, correctAnswer, DROPDOWN);
 
 }
 
-function getRadioQuestionsData(num, snapshot, currentQuestion, currentPathname) {
+function getRadioQuestionsData(num, snapshot) {
 
           var i = currentQuestion;
           var correctAnswer = snapshot.child("Question" + i).val().correctAnswer;
@@ -284,32 +402,7 @@ function getRadioQuestionsData(num, snapshot, currentQuestion, currentPathname) 
           document.getElementById("dataDiv").appendChild(submitbtn);
           // ...
 
-        $('#nextBtn').click(function(e){
-          e.preventDefault();
-          if(document.getElementById('nextBtn').innerHTML == "Next") {
-            console.log(currentPathname.slice(0, -1));
-            if((parseInt(currentQuestion) + 1) != num) {
-              window.location.replace("http://localhost:3000" + currentPathname.slice(0, -1) + (parseInt(currentQuestion) + 1));
-            }
-            else {
-              window.location.replace("http://localhost:3000/success");
-            }
-          }
-          else {
-            console.log("submited!");
-            var omg = $("input[type=radio]#radio" + correctAnswer ).is(":checked");
-            console.log("Omg!" + omg);
-            if(omg) {
-              console.log("You're correct!");
-              document.getElementById('nextBtn').innerHTML = 'Next';
-            }
-            else {
-              console.log("Incorrect, please try again.")
-            }
-        }
-          //saveProfileData(totalData);
-          //window.location.replace("http://localhost:3000/results");
-        });
+        submitBtnClicked(correctText, correctAnswer, RADIO);
 
 
 }

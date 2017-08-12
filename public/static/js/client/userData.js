@@ -44,6 +44,7 @@ function getUsername() {
 
 const GOOGLE = 0;
 const FACEBOOK = 1;
+const TWITTER = 2;
 
 function chooseProvider(i) {
 
@@ -69,9 +70,9 @@ function chooseProvider(i) {
 
   }
 
-  if(i == FACEBOOK) {
+  else if(i == FACEBOOK) {
 
-    console.log("Google chosen");
+    console.log("Facebook chosen");
 
     provider = new firebase.auth.FacebookAuthProvider();
 
@@ -89,6 +90,15 @@ function chooseProvider(i) {
 
   }
 
+  else if(i == TWITTER) {
+
+    console.log("Twitter chosen");
+
+    provider = new firebase.auth.TwitterAuthProvider();
+
+    valid = true;
+
+  }
 
 
 
@@ -109,9 +119,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   console.log("Success!");
   console.log("Token:" + token);
   console.log("User:" + user.email);
-  console.log("More email stuff:" + firebase.currentUser.displayName);
+  //console.log("More email stuff:" + firebase.currentUser.displayName);
 
-  window.location.replace(UKIE_ADDRESS + "/profile");
+  window.location.replace(UKIE_ADDRESS + "profile");
 
   // ...
 }).catch(function(error) {
@@ -122,6 +132,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   var email = error.email;
   // The firebase.auth.AuthCredential type that was used.
   var credential = error.credential;
+
+  console.log("Failure!" + errorCode + " :" + errorMessage + " :" + email + " :" + credential);
+
   // ...
 });
 

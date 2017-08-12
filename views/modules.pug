@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
+    script(type='text/javascript', src='/js/client/moduleData.js')
+    style.
+      ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      }
+      li {
+      float: left;
+      }
+  body
+    ul#dataStore
+    script.
+      getModuleData();

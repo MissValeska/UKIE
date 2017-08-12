@@ -64,9 +64,9 @@ html(lang='en')
                 i.fa.fa-tasks
                 span.badge.bg-theme 4
               ul.dropdown-menu.extended.inbox
-                .notify-arrow.notify-arrow-green
+                .notify-arrow.notify-arrow-blue
                 li
-                  p.green You have 4 items in your inventory
+                  p.blue You have 4 items in your inventory
                 li
                   a(href='index.html#')
                     span.photo
@@ -153,12 +153,12 @@ html(lang='en')
             // inbox dropdown start
             li#header_inbox_bar.dropdown
               a.dropdown-toggle(data-toggle='dropdown', href='index.html#')
-                i.fa.fa-envelope-o
-                span.badge.bg-theme 5
+                i.fa.fa-users
+                span.badge.bg-theme03 5
               ul.dropdown-menu.extended.inbox
                 .notify-arrow.notify-arrow-green
                 li
-                  p.green You have 5 new messages
+                  p.green You have 5 friends
                 li
                   a(href='index.html#')
                     span.photo
@@ -167,7 +167,7 @@ html(lang='en')
                       span.from Zac Snider
                       span.time Just now
                     span.message
-                      | Hi mate, how is everything?
+                      | Wants to connect with you
                 li
                   a(href='index.html#')
                     span.photo
@@ -176,7 +176,7 @@ html(lang='en')
                       span.from Divya Manian
                       span.time 40 mins.
                     span.message
-                      | Hi, I need your help with this.
+                      | Completed Alphabet Module
                 li
                   a(href='index.html#')
                     span.photo
@@ -185,7 +185,7 @@ html(lang='en')
                       span.from Dan Rogers
                       span.time 2 hrs.
                     span.message
-                      | Love your new Dashboard.
+                      | Reached Level 5
                 li
                   a(href='index.html#')
                     span.photo
@@ -194,17 +194,14 @@ html(lang='en')
                       span.from Dj Sherman
                       span.time 4 hrs.
                     span.message
-                      | Please, answer asap.
+                      | Joined Ukie
                 li
-                  a(href='index.html#') See all messages
+                  a(href='/friends') See all friends
             // inbox dropdown end
           // notification end
         .top-menu
           ul.nav.pull-right.top-menu
             li
-<<<<<<< HEAD
-              a.logout(href='/') Logout
-=======
               a#logout.logout(href='login.html') Logout
               script.
                 $('#logout').click(function(e) {
@@ -218,7 +215,6 @@ html(lang='en')
                     // An error happened.
                   });
                 });
->>>>>>> 5f0a624bd9577f530ca75d2847efc6c5cc36d08d
       // header end
       //
         **********************************************************************************************************************************************************
@@ -242,62 +238,60 @@ html(lang='en')
                 span Dashboard
             li.sub-menu
               a(href='javascript:;')
-                i.fa.fa-desktop
-                span UI Elements
-              ul.sub
-                li
-                  a(href='general.html') General
-                li
-                  a(href='buttons.html') Buttons
-                li
-                  a(href='panels.html') Panels
+                i.fa.fa-graduation-cap
+                span Practice
             li.sub-menu
               a(href='javascript:;')
-                i.fa.fa-cogs
-                span Components
-              ul.sub
-                li
-                  a(href='calendar.html') Calendar
-                li
-                  a(href='gallery.html') Gallery
-                li
-                  a(href='todo_list.html') Todo List
+                i.fa.fa-lightbulb-o
+                span Grammar Tips
             li.sub-menu
               a(href='javascript:;')
                 i.fa.fa-book
-                span Extra Pages
-              ul.sub
-                li
-                  a(href='blank.html') Blank Page
-                li
-                  a(href='login.html') Login
-                li
-                  a(href='lock_screen.html') Lock Screen
+                span Stories
+              //- ul.sub
+              //-   li
+              //-     a(href='blank.html') Blank Page
+              //-   li
+              //-     a(href='login.html') Login
+              //-   li
+              //-     a(href='lock_screen.html') Lock Screen
             li.sub-menu
               a(href='javascript:;')
-                i.fa.fa-tasks
-                span Forms
-              ul.sub
-                li
-                  a(href='form_component.html') Form Components
+                i.fa.fa-star-half-o
+                span Badges
+              //- ul.sub
+              //-   li
+              //-     a(href='form_component.html') Form Components
             li.sub-menu
               a(href='javascript:;')
-                i.fa.fa-th
-                span Data Tables
-              ul.sub
-                li
-                  a(href='basic_table.html') Basic Table
-                li
-                  a(href='responsive_table.html') Responsive Table
+                i.fa.fa-users
+                span Friends
+              //- ul.sub
+              //-   li
+              //-     a(href='basic_table.html') Basic Table
+              //-   li
+              //-     a(href='responsive_table.html') Responsive Table
             li.sub-menu
               a(href='javascript:;')
-                i.fa.fa-bar-chart-o
-                span Charts
-              ul.sub
-                li
-                  a(href='morris.html') Morris
-                li
-                  a(href='chartjs.html') Chartjs
+                i.fa.fa-comments
+                span Discussions
+              //- ul.sub
+              //-   li
+              //-     a(href='morris.html') Morris
+              //-   li
+              //-     a(href='chartjs.html') Chartjs
+              li.sub-menu
+                a(href='javascript:;')
+                  i.fa.fa-cog
+                  span Settings
+              li.sub-menu
+                a(href='javascript:;')
+                  i.fa.fa-info-circle
+                  span About
+              li.sub-menu
+                a(href='javascript:;')
+                  i.fa.fa-envelope
+                  span Contact
           // sidebar menu end
       // sidebar end
       //

@@ -18,6 +18,14 @@ app.get('/', function(req, res) {
 res.render('index')
 });
 
+app.get('/index.html', function(req, res) {
+res.render('index')
+});
+
+app.get('/friends', function(req, res) {
+res.render('friends')
+});
+
 app.get('/inventory', function(req, res) {
 res.render('inventory')
 });

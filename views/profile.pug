@@ -226,18 +226,18 @@ html(lang='en')
           // sidebar menu start
           ul#nav-accordion.sidebar-menu
             p.centered
-              a(href='profile.html')
+              a(href='profile')
                 img#userimg.img-circle(src='', width='60')
             h5#username.centered
             script.
               getProfileUrl();
               getUsername();
             li.mt
-              a.active(href='index.html')
+              a.active(href='index')
                 i.fa.fa-dashboard
                 span Dashboard
             li.sub-menu
-              a(href='javascript:;')
+              a#practice(href='modules')
                 i.fa.fa-graduation-cap
                 span Practice
             li.sub-menu

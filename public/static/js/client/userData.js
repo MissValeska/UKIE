@@ -10,6 +10,104 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var userData;
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    console.log("Username:" + user.displayName);
+    userData = user;
+  } else {
+    console.log("not signed in!")
+    //login();
+    // No user is signed in.
+  }
+});
+
+function listInventoryItems(snapshot) {
+
+  //var inventoryData = getInventory();
+
+  for(var i = 1; i <= snapshot.val().InNum; i++) {
+    console.log("In inventory!")
+    var url = snapshot.child("item" + i).val().url;
+    var name = snapshot.child("item" + i).val().name;
+    var count = snapshot.child("item" + i).val().count;
+    var shortDesc = snapshot.child("item" + i).val().shortDesc;
+    var node = document.createElement("li");              // Create a <li> node
+    var imgnode = document.createElement("img"); 
+    var linknode = document.createElement("a");
+    var span = document.createElement("span");                
+    imgnode.setAttribute("src", url);
+    span.setAttribute("class", "photo");
+    span.appendChild(imgnode);
+    linknode.setAttribute("href", "index#");
+    linknode.appendChild(span);
+    var span1 = document.createElement("span");
+    var span2 = document.createElement("span");
+    var span3 = document.createElement("span"); 
+    span1.setAttribute("class", "subject");
+    span2.setAttribute("class", "from");
+    span2.innerHTML = name;
+    span3.setAttribute("class", "time");
+    span3.innerHTML = count;
+    span1.appendChild(span2);
+    span1.appendChild(span3);
+    linknode.appendChild(span1);
+    var spanmsg = document.createElement("span");
+    spanmsg.setAttribute("class", "message");
+    spanmsg.innerHTML = shortDesc;
+    linknode.appendChild(spanmsg);
+    node.appendChild(linknode);                             // Append the text to <li>
+    node.id = "item" + i;
+    document.getElementById("inventorybox").appendChild(node);     // Append <li> to <ul> with id="dataStore"
+    // ...
+  }
+
+  var node = document.createElement("li");
+  var linknode = document.createElement("a");
+  linknode.setAttribute("href", "http://127.0.0.1:3000/inventory");
+  linknode.innerHTML = "See all items";
+  node.appendChild(linknode);
+  document.getElementById("inventorybox").appendChild(node);
+
+}
+
+const LIST = 10;
+
+function getInventory(i) {
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log("Username:" + user.displayName);
+      userData = user;
+    } else {
+      console.log("not signed in!")
+      //login();
+      // No user is signed in.
+    }
+
+    firebase.database().ref('users/' + userData.uid + "/Inventory").once('value').then(function(snapshot) {
+      //try {
+        snapshot;
+        console.log("InNum:" + snapshot.val().InNum);
+        if(i != LIST) {
+          document.getElementById("itemnum").innerHTML = "You have " + snapshot.val().TotalNum + " items in your inventory";
+          document.getElementById("totalcount").innerHTML = snapshot.val().TotalNum;
+        }
+        else if(i == LIST) {
+          listInventoryItems(snapshot);
+        }
+      /*}
+      catch(err) {
+        console.log(err.message);
+      }*/
+    });
+  });
+
+}
+
 function getProfileUrl() {
 
   firebase.auth().onAuthStateChanged(function(user) {
@@ -120,6 +218,8 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   console.log("Token:" + token);
   console.log("User:" + user.email);
   //console.log("More email stuff:" + firebase.currentUser.displayName);
+
+  userData = user;
 
   window.location.replace(UKIE_ADDRESS + "profile");
 

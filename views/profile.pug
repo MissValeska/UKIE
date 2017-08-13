@@ -60,51 +60,16 @@ html(lang='en')
           ul.nav.top-menu
             // inventory dropdown start
             li#header_inbox_bar.dropdown
-              a.dropdown-toggle(data-toggle='dropdown', href='index.html#')
+              a.dropdown-toggle(data-toggle='dropdown', href='index#')
                 i.fa.fa-tasks
-                span.badge.bg-theme 4
-              ul.dropdown-menu.extended.inbox
+                span#totalcount.badge.bg-theme
+              ul#inventorybox.dropdown-menu.extended.inbox
                 .notify-arrow.notify-arrow-blue
                 li
-                  p.blue You have 4 items in your inventory
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='https://firebasestorage.googleapis.com/v0/b/ukie-f3bcd.appspot.com/o/images%2Ffood%2F051-carrot.png?alt=media&token=94dd6d74-2612-4c36-919f-13b5bda34ae0')
-                    span.subject
-                      span.from Carrots
-                      span.time 3
-                    span.message
-                      | Help you keep your health full.
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='https://firebasestorage.googleapis.com/v0/b/ukie-f3bcd.appspot.com/o/images%2Fbadges%2Fabetka.png?alt=media&token=7299cf9e-ee2b-43dd-aabc-566e0ccce269')
-                    span.subject
-                      span.from Abetka
-                      span.time 1
-                    span.message
-                      | Access to other modules.
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='https://maxcdn.icons8.com/Share/icon/Military//sword1600.png')
-                    span.subject
-                      span.from Sword
-                      span.time 1
-                    span.message
-                      | Provides extra strength.
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='https://maxcdn.icons8.com/office/PNG/512/Objects/shirt_80-512.png')
-                    span.subject
-                      span.from Shirt
-                      span.time 2
-                    span.message
-                      | Provides extra protection.
-                li
-                  a(href='http://127.0.0.1:3000/inventory') See all items
+                  p#itemnum.blue
+                script.
+                  getInventory(0);
+                  getInventory(10);
             // inventory dropdown end
             //- // settings start
             //- li.dropdown

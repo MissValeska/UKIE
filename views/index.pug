@@ -1,0 +1,611 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    |     
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    |     
+    title Ukie for Ukrainian language
+    |     
+    meta(name='author', content='Gabriela Medvetska')
+    meta(name="description", content="UKIE - App for Learning Ukrainian Language")
+    |     
+    meta(name="keywords", content="Ukrainian language, Ukrainian, learning, studying, exercises, Ukraine")
+    |     
+    |     
+    link(rel="stylesheet", type="text/css", href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans")
+    |     
+    link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    |     
+    link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css")
+    |     
+    link(rel="stylesheet", type="text/css", href="/css/imagehover.min.css")
+    |     
+    link(rel="stylesheet", type="text/css", href="/css/home.css")
+    //
+  |   
+  body
+    // Navigation bar
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle(type="button", data-toggle="collapse", data-target="#myNavbar")
+            span.icon-bar
+            |           
+            span.icon-bar
+            |           
+            span.icon-bar
+          |         
+          a.navbar-brand(href="/")
+            | UKIE
+        |         
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href="#feature") Features
+            |           
+            li
+              a(href="#about") About
+            |           
+            li
+              a(href="#exercises") Exercises
+            |           
+            li
+              a(href="#donate") Donate
+            |           
+            li
+              a(href="#", data-target="#login", data-toggle="modal") Sign in
+            |           
+            li.btn-trial
+              a(href="#footer") Contact
+    // / Navigation bar
+    // Modal box
+    #login.modal.fade(role="dialog")
+      .modal-dialog.modal-sm
+        // Modal content no 1
+        .modal-content
+          h4.modal-header.text-center
+            button.close(type="button", data-dismiss="modal") ×
+            |
+            a#login-box-link.modal-title.active(href="#") Login
+            |       
+            a#signup-box-link.modal-title(href="#") Sign Up
+          |           
+          .modal-body.padtrbl
+            .login-box-body
+              .social-login
+                button#facebook.btn.btn-facebook(type='submit')
+                  i.fa.fa-facebook
+                  |  Facebook
+                button#twitter.btn.btn-twitter(type='submit')
+                  i.fa.fa-twitter
+                  |  Twitter
+                button#google.btn.btn-google(type='submit')
+                  i.fa.fa-google-plus
+                  |  Google
+              |
+              .email-login                   
+                .form-group
+                  form#loginForm(name="")
+                    .form-group.has-feedback
+                      // --- username ------------
+                      input#loginid.form-control(placeholder="Email", type="text", autocomplete="off")
+                      |  
+                      |             
+                      span#span_loginid(style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;")
+                      // -Alredy exists  !
+                      span.glyphicon.glyphicon-user.form-control-feedback
+                    |                   
+                    .form-group.has-feedback
+                      // --- password ------------
+                      input#loginpsw.form-control(placeholder="Password", type="password", autocomplete="off")
+                      |             
+                      span#span_loginpsw(style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;")
+                      // -Doesn't match  !
+                      span.glyphicon.glyphicon-lock.form-control-feedback
+                    |                   
+                    .row
+                      .col-xs-12
+                        .checkbox.icheck
+                          label
+                            input#loginrem(type="checkbox")
+                            |  Remember Me
+                      |                       
+                      .col-xs-12
+                        button.btn.btn-green.btn-block.btn-flat(type="button", onclick="userlogin()") Sign In
+                      |
+                    |
+                    .row
+                      .col-xs-12
+                        a.text-center.forgot-password(href="#") Forgot password?
+                      |
+                    |
+                  |
+                |
+              |
+              .email-signup                 
+                .form-group
+                  form#loginForm(name="")
+                    .form-group.has-feedback
+                      // --- username ------------
+                      input#loginid.form-control(placeholder="Email", type="text", autocomplete="off")
+                      |  
+                      |             
+                      span#span_loginid(style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;")
+                      // -Alredy exists  !
+                      span.glyphicon.glyphicon-user.form-control-feedback
+                      |                   
+                    .form-group.has-feedback
+                      // --- password ------------
+                      input#loginpsw.form-control(placeholder="Password", type="password", autocomplete="off")
+                      |             
+                      span#span_loginpsw(style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;")
+                      // -Doesn't match  !
+                      span.glyphicon.glyphicon-lock.form-control-feedback
+                      |
+                    .form-group.has-feedback
+                      // --- CONFIRM password ------------
+                      input#loginpsw.form-control(placeholder="Confirm Password", type="password", autocomplete="off")
+                      |             
+                      span#span_loginpsw(style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;")
+                      // -Doesn't match  !
+                      span.glyphicon.glyphicon-lock.form-control-feedback
+                      |                  
+                    .row              
+                      .col-xs-12
+                        button.btn.btn-green.btn-block.btn-flat(type="button", onclick="userlogin()") Sign Up
+                      |
+                    |
+                  |
+                |
+    // / Modal box
+    // Banner
+    .banner
+      .bg-color
+        .container
+          .row
+            .banner-text.text-center
+              .text-border
+                h2.text-dec Language & Culture
+              |               
+              .intro-para.text-center.quote
+                p.big-text Learning Ukrainian has never been easier.
+                |                 
+                p.small-text
+                  | Re-discover the country you already know about in a completely different way with our language course
+                  br
+                  |that combines cultural and linguistic aspects and turns mundane words memorisation into a fun experience.
+                |                 
+                a.btn.get-quote(href="#", data-target="#login", data-toggle="modal") START YOUR JOURNEY
+              |               
+              a.mouse-hover(href="#feature")
+                .mouse
+    // / Banner
+    // Feature
+    section#feature.section-padding
+      .container
+        .row
+          .header-section.text-center
+            h2 Features
+            |             
+            p
+              | Ukie combines all of the features of the modern language-learning cources,
+              br
+              |  which personalize your experience.
+            |             
+            hr.bottom-line
+          |           
+          .feature-info
+            .fea
+              .col-md-4
+                .heading.pull-right
+                  h4 High-Quality Content
+                  |                   
+                  p
+                    |  All of the content is created by the native speakers. No more problems with weird sentences and or lack of Cyrillic introduction for beginners. We will expand Ukie to different age groups, so all of the interested learners from 0 to 100 could have this opportunity. 
+                |                 
+                .fea-img.pull-left
+                  i.fa.fa-check
+            |             
+            .fea
+              .col-md-4
+                .heading.pull-right
+                  h4 Available Support
+                  |                   
+                  p
+                    | We are unconditionally commited to this project in order to bring Ukrainian to the world. That's said, we are happy to respond to our community, take in consideration your feedback, and constantly improve our project. You can contact us even if you just want to say #[em “Hi!”]
+                |                 
+                .fea-img.pull-left
+                  i.fa.fa-handshake-o
+                  //i.fa.fa-life-ring
+            |             
+            .fea
+              .col-md-4
+                .heading.pull-right
+                  h4 Detailed Feedback
+                  |                   
+                  p
+                    | Once your start your journey, Ukie will provide you with tons of useful data and tips how you could improve your progress. We don't have any hidden features available for paid users only or pay to learn options, because we want to make sure you take out the most from Ukie despite your income.
+                |                 
+                .fea-img.pull-left
+                  i.fa.fa-line-chart
+    // / feature
+    // about
+    section#about.section-padding
+      .container
+        .row
+          .col-md-6
+            .col-lg-4.col-md-4.col-sm-4.col-xs-4
+              .orga-stru
+                h3 95%
+                |                 
+                p We have almost finished our alphabet section.
+                |                 
+                i.fa.fa-book
+            |             
+            .col-lg-4.col-md-4.col-sm-4.col-xs-4
+              .orga-stru
+                h3 40%
+                |                 
+                p We are developing main exercises now.
+                |                 
+                i.fa.fa-pencil
+            |             
+            .col-lg-4.col-md-4.col-sm-4.col-xs-4
+              .orga-stru
+                h3 5%
+                |                 
+                p We are designing new features and getting them ready.
+                |                 
+                i.fa.fa-database
+          |           
+          .col-md-6
+            .detail-info
+              hgroup
+                h3.det-txt  What content is already available in Ukie?
+                |                 
+                h4.sm-txt (Revised and Updated for 2017)
+              |               
+              p.det-p
+                | We conducted our own research looking for helpful sources to study Ukrainian for beginners. To our great disappointment, there weren't many so we decided to change it. Ukie will teach you from the very basics with familiar words like #[em pizza] and #[em sushi] to the advanced level where you will be able to read books and magazines with ease.
+    // / about
+    // Cta
+    section#cta-2
+      .container
+        .row
+          .col-lg-12
+            h2.text-center Subscribe Now
+            |               
+            p.cta-2-txt
+              | Sign up for our free monthly Ukrainian language exercises, we’ll send them right to your inbox.
+            |              
+            .cta-2-form.text-center
+              form#workshop-newsletter-form(action="#", method="post")
+                input(name="", placeholder="Your Email", type="email")
+                |                     
+                input.cta-2-form-submit-btn(value="Subscribe", type="submit")
+    // / Cta
+  
+    // Team member
+    section#team-member.section-padding
+      .container
+        .row
+          .header-section.text-center
+            h2 Meet Ukie's Founders
+            |             
+            p
+              | Valeska & Gabriela are two Computer Science students who are fighting for
+              br
+              |  the place under the sun for the Ukrainian language.
+            |             
+            hr.bottom-line
+          |           
+          .col-lg-4.col-md-4.col-sm-4
+            .pm-staff-profile-container
+              .pm-staff-profile-image-wrapper.text-center
+                .pm-staff-profile-image
+                  img.img-thumbnail.img-circle(src="img/mentor.jpg", alt="")
+              |                                 
+              |               
+              .pm-staff-profile-details.text-center
+                p.pm-staff-profile-name Gabriela Medvetska
+                |                 
+                p.pm-staff-profile-title Front End Developer & UI/UX Designer
+                |                 
+                |                 
+                p.pm-staff-profile-bio
+                  | Originally from Ukraine, Gabriela came to the US in 2015 to pursue her Bachelor's degree. She's been inspired by the startup atmosphere in Silicon Valley and started working on the concept of the website in October 2016.
+          |           
+          .col-lg-4.col-md-4.col-sm-4
+            .pm-staff-profile-container
+              .pm-staff-profile-image-wrapper.text-center
+                .pm-staff-profile-image
+                  img.img-thumbnail.img-circle(src="img/mentor.jpg", alt="")
+              |                                 
+              |               
+              .pm-staff-profile-details.text-center
+                p.pm-staff-profile-name Valeska Victoria
+                |                 
+                p.pm-staff-profile-title Back End Developer & UX Designer
+                |                 
+                |                 
+                p.pm-staff-profile-bio
+                  | Valeska is a passionate learner and to study Ukrainian is challenging for her due to the lack of resources. She embraced the idea of the application and made it possible for the alpha version of the web application to be released earlier this summer.
+          |           
+          .col-lg-4.col-md-4.col-sm-4
+            .pm-staff-profile-container
+              .pm-staff-profile-image-wrapper.text-center
+                .pm-staff-profile-image
+                  img.img-thumbnail.img-circle(src="img/mentor.jpg", alt="")
+              |                                 
+              |               
+              .pm-staff-profile-details.text-center
+                p.pm-staff-profile-name Ronnie James Dio
+                |                 
+                p.pm-staff-profile-title Chief Happiness Officer
+                |                 
+                |                 
+                p.pm-staff-profile-bio
+                  | Ronnie is our emotional support who doesn't leave us under any circumstances and helps to maintain positive atmosphere during our work. He makes sure we don't overwork and that we get enough sleep, food, and walk.
+    // / team member
+    // Exercises
+    section#exercises.section-padding
+      .container
+        .row
+          .header-section.text-center
+            h2 Exercises
+            |             
+            p
+              | Take a sneak peek into our exercises to be sure that Ukie is worth waiting!
+              br
+              |  We are doing our best #[strong to bring Ukie home] as soon as possible.
+            |             
+            hr.bottom-line
+      |       
+      .container
+        .row
+          .col-md-4.col-sm-6.padleft-right
+            figure.imghvr-fold-up
+              img.img-responsive(src="img/course01.jpg")
+              |               
+              figcaption
+                h3 Course Name
+                |                   
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.
+              |               
+              a(href="#")
+          |           
+          .col-md-4.col-sm-6.padleft-right
+            figure.imghvr-fold-up
+              img.img-responsive(src="img/course02.jpg")
+              |               
+              figcaption
+                h3 Course Name
+                |                   
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.
+              |               
+              a(href="#")
+          |           
+          .col-md-4.col-sm-6.padleft-right
+            figure.imghvr-fold-up
+              img.img-responsive(src="img/course03.jpg")
+              |               
+              figcaption
+                h3 Course Name
+                |                   
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.
+              |               
+              a(href="#")
+          |           
+          .col-md-4.col-sm-6.padleft-right
+            figure.imghvr-fold-up
+              img.img-responsive(src="img/course04.jpg")
+              |               
+              figcaption
+                h3 Course Name
+                |                   
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.
+              |               
+              a(href="#")
+          |           
+          .col-md-4.col-sm-6.padleft-right
+            figure.imghvr-fold-up
+              img.img-responsive(src="img/course05.jpg")
+              |               
+              figcaption
+                h3 Course Name
+                |                   
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.
+              |               
+              a(href="#")
+          |           
+          .col-md-4.col-sm-6.padleft-right
+            figure.imghvr-fold-up
+              img.img-responsive(src="img/course06.jpg")
+              |               
+              figcaption
+                h3 Course Name
+                |                   
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.
+              |               
+              a(href="#")
+    // / exercises
+    // donate
+    section#donate.section-padding
+      .container
+        .row
+          .header-section.text-center
+            h2 We welcome Donations
+            |             
+            p
+              | It's important for us to keep Ukie free and accessible to all,
+              br
+              |  that's why we need your support.
+            |             
+            hr.bottom-line
+          |           
+          .col-md-4.col-sm-4
+            .donation-table
+              // Donation
+              .donate-head
+                h4 Monthly Donation
+                |                 
+                span.fa.fa-usd.curency
+                |  
+                span.amount 200
+              // Donation Detail
+              .donation-in.mart-15
+                a.btn.btn-bg.green.btn-block(href="#") DONATE
+          |           
+          .col-md-4.col-sm-4
+            .donation-table
+              // Donation
+              .donate-head
+                h4 Quarterly Donation
+                |                 
+                span.fa.fa-usd.curency
+                |  
+                span.amount 800
+              // Donation Detail
+              .donation-in.mart-15
+                a.btn.btn-bg.yellow.btn-block(href="#") DONATE
+          |           
+          .col-md-4.col-sm-4
+            .donation-table
+              // Donation
+              .donate-head
+                h4 Year Donation
+                |                 
+                span.fa.fa-usd.curency
+                |  
+                span.amount 1200
+              // Donation Detail
+              .donation-in.mart-15
+                a.btn.btn-bg.red.btn-block(href="#") DONATE
+    // / Donate
+    // Contact
+    section#contact.section-padding
+      .container
+        .row
+          .header-section.text-center
+            h2 Contact Us
+            |             
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,
+              br
+              |  maiores, magni dolorum aliquam.
+            |             
+            hr.bottom-line
+          |           
+          #sendmessage Your message has been sent. Thank you!
+          |           
+          #errormessage
+          |           
+          form.contactForm(action="", method="post", role="form")
+            .col-md-6.col-sm-6.col-xs-12.left
+              .form-group
+                input#name.form-control.form(type="text", name="name", placeholder="Your Name", data-rule="minlen:4", data-msg="Please enter at least 4 chars")
+                |                     
+                .validation
+              |                 
+              .form-group
+                input#email.form-control(type="email", name="email", placeholder="Your Email", data-rule="email", data-msg="Please enter a valid email")
+                |                     
+                .validation
+              |                 
+              .form-group
+                input#subject.form-control(type="text", name="subject", placeholder="Subject", data-rule="minlen:4", data-msg="Please enter at least 8 chars of subject")
+                |                     
+                .validation
+            |               
+            |               
+            .col-md-6.col-sm-6.col-xs-12.right
+              .form-group
+                textarea.form-control(name="message", rows="5", data-rule="required", data-msg="Please write something for us", placeholder="Message")
+                |                     
+                .validation
+            |               
+            |               
+            .col-xs-12
+              // Button
+              button#submit.form.contact-form-button.light-form-button.oswald.light(type="submit", name="submit") SEND EMAIL
+    // / Contact
+    // Footer
+    footer#footer.footer
+      .container.text-center
+        h3 Start Your Free Trial Now!
+        |     
+        |       
+        form.mc-trial.row
+          .form-group.col-md-3.col-md-offset-2.col-sm-4
+            .controls
+              input.form-control(name="name", placeholder="Enter Your Name", type="text")
+          // End email input
+          .form-group.col-md-3.col-sm-4
+            .controls
+              input.form-control(name="EMAIL", placeholder="Enter Your email", type="email")
+          // End email input
+          .col-md-2.col-sm-4
+            p
+              button.btn.btn-block.btn-submit(name="submit", type="submit")
+                | Submit 
+                i.fa.fa-arrow-right
+        // End newsletter-form
+        ul.social-links
+          li
+            a(href="#link")
+              i.fa.fa-twitter.fa-fw
+          |         
+          li
+            a(href="#link")
+              i.fa.fa-facebook.fa-fw
+          |         
+          li
+            a(href="#link")
+              i.fa.fa-google-plus.fa-fw
+          |         
+          li
+            a(href="#link")
+              i.fa.fa-dribbble.fa-fw
+          |         
+          li
+            a(href="#link")
+              i.fa.fa-linkedin.fa-fw
+        |         ©2017 Ukie. All rights reserved
+    // / Footer
+    script(src="/js/jquery.min.js")
+    |     
+    script(src="/js/jquery.easing.min.js")
+    |     
+    script(src="/js/bootstrap.min.js")
+    |     
+    script(src="/js/home.js")
+    |
+    script(src="/js/login.js")
+    |
+    script(type='text/javascript', src='/js/jquery.backstretch.min.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
+    script(src='https://code.jquery.com/jquery-1.11.1.js')
+    script(type='text/javascript', src='/js/client/userData.js')
+    script.
+      $('#google').click(function(e) {
+        e.preventDefault();
+        chooseProvider(0);
+      });
+      $('#facebook').click(function(e) {
+        e.preventDefault();
+        chooseProvider(1);
+      });
+      $('#twitter').click(function(e) {
+        e.preventDefault();
+        chooseProvider(2);
+      });

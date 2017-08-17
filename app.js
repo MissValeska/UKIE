@@ -46,6 +46,11 @@ app.get('/results', function (req, res) {
 res.render('results')
 });
 
+app.get('/map', function(req, res) {
+res.render('map')
+});
+
+
 app.get('/modules', function (req, res) {
   res.render('modules')
 });

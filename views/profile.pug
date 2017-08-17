@@ -4,10 +4,10 @@ html(lang='en')
     
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='description', content='')
-    meta(name='author', content='Dashboard')
-    meta(name='keyword', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina')
-    title UKIE - App for Learning Ukrainian Language
+    meta(name='description', content='UKIE - App for Learning Ukrainian Language')
+    meta(name='author', content='Gabriela Medvetska')
+    meta(name='keywords', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"Ukrainian language, Ukrainian, learning, studying, courses, Ukraine"')
+    title UKIE for Ukrainian Language
     // Bootstrap core CSS
     link(href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css', rel='stylesheet')
     // external css
@@ -52,7 +52,7 @@ html(lang='en')
         .sidebar-toggle-box
           .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
         // logo start
-        a.logo(href='index.html')
+        a.logo(href='/')
           b Ukie App
         // logo end
         #top_menu.nav.notify-row
@@ -71,61 +71,21 @@ html(lang='en')
                   getInventory(0);
                   getInventory(10);
             // inventory dropdown end
-            //- // settings start
-            //- li.dropdown
-            //-   a.dropdown-toggle(data-toggle='dropdown', href='index.html#')
-            //-     i.fa.fa-tasks
-            //-     span.badge.bg-theme 4
-            //-   ul.dropdown-menu.extended.tasks-bar
-            //-     .notify-arrow.notify-arrow-green
-            //-     li
-            //-       p.green You have 4 pending tasks
-            //-     li
-            //-       a(href='index.html#')
-            //-         .task-info
-            //-           .desc Profile Information
-            //-           .percent 40%
-            //-         .progress.progress-striped
-            //-           .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
-            //-             span.sr-only 40% Complete (success)
-            //-     li
-            //-       a(href='index.html#')
-            //-         .task-info
-            //-           .desc Visit Inventory
-            //-           .percent 0%
-            //-         .progress.progress-striped
-            //-           .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%')
-            //-             span.sr-only 0% Complete (warning)
-            //-     li
-            //-       a(href='index.html#')
-            //-         .task-info
-            //-           .desc Add Friends
-            //-           .percent 20%
-            //-         .progress.progress-striped
-            //-           .progress-bar.progress-bar-info(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
-            //-             span.sr-only 20% Complete
-            //-     li
-            //-       a(href='index.html#')
-            //-         .task-info
-            //-           .desc Complete an Exercise
-            //-           .percent 10%
-            //-         .progress.progress-striped
-            //-           .progress-bar.progress-bar-danger(role='progressbar', aria-valuenow='10', aria-valuemin='0', aria-valuemax='100', style='width: 10%')
-            //-             span.sr-only 10% Complete (Important)
-            //-     li.external
-            //-       a(href='#') See All Tasks
-            //- // settings end
             // inbox dropdown start
             li#header_inbox_bar.dropdown
-              a.dropdown-toggle(data-toggle='dropdown', href='index.html#')
+              a.dropdown-toggle(data-toggle='dropdown', href='/#')
                 i.fa.fa-users
                 span.badge.bg-theme03 5
               ul.dropdown-menu.extended.inbox
                 .notify-arrow.notify-arrow-green
                 li
-                  p.green You have 5 friends
+                  p.green You have #{friends} friends
+                  
+                  //https://pugjs.org/language/case.html
+                  
+                  
                 li
-                  a(href='index.html#')
+                  a(href='/#')
                     span.photo
                       img(alt='avatar', src='img/ui-zac.jpg')
                     span.subject
@@ -134,7 +94,7 @@ html(lang='en')
                     span.message
                       | Wants to connect with you
                 li
-                  a(href='index.html#')
+                  a(href='/#')
                     span.photo
                       img(alt='avatar', src='img/ui-divya.jpg')
                     span.subject
@@ -143,7 +103,7 @@ html(lang='en')
                     span.message
                       | Completed Alphabet Module
                 li
-                  a(href='index.html#')
+                  a(href='/#')
                     span.photo
                       img(alt='avatar', src='img/ui-danro.jpg')
                     span.subject
@@ -152,7 +112,7 @@ html(lang='en')
                     span.message
                       | Reached Level 5
                 li
-                  a(href='index.html#')
+                  a(href='/#')
                     span.photo
                       img(alt='avatar', src='img/ui-sherman.jpg')
                     span.subject
@@ -272,8 +232,8 @@ html(lang='en')
                 .col-md-2.col-sm-2.col-md-offset-1.box0
                   .box1
                     span.li_heart
-                    h3 933
-                  p 933 People liked your page the last 24hs. Whoohoo!
+                    h3 15
+                  p 15 Ukrainian words learned.
                 .col-md-2.col-sm-2.box0
                   .box1
                     span.li_cloud
@@ -453,8 +413,8 @@ html(lang='en')
       // footer start
       footer.site-footer
         .text-center
-          | 2014 - Alvarez.is
-          a.go-top(href='index.html#')
+          | ©2017 Ukie. All rights reserved
+          a.go-top(href='/#')
             i.fa.fa-angle-up
       // footer end
     // js placed at the end of the document so the pages load faster
@@ -471,52 +431,21 @@ html(lang='en')
     script(type='text/javascript', src='/js/gritter-conf.js')
     // script for this page
     script(src='/js/sparkline-chart.js')
-    script(src='/js/zabuto_calendar.js')
     script(type='text/javascript').
       $(document).ready(function () {
       var unique_id = $.gritter.add({
       // (string | mandatory) the heading of the notification
-      title: 'Welcome to Dashgum!',
+      title: 'Welcome to Ukie!',
       // (string | mandatory) the text inside the notification
       text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
       // (string | optional) the image to display on the left
-      image: 'img/ui-sam.jpg',
+      image: '/img/ukie.jpg',
       // (bool | optional) if you want it to fade out on its own or just sit there
-      sticky: true,
+      sticky: false,
       // (int | optional) the time you want it to be alive for before fading out
       time: '',
       // (string | optional) the class name you want to apply to that specific message
       class_name: 'my-sticky-class'
       });
       return false;
-      });
-    script(type='application/javascript').
-      $(document).ready(function () {
-      $("#date-popover").popover({html: true, trigger: "manual"});
-      $("#date-popover").hide();
-      $("#date-popover").click(function (e) {
-      $(this).hide();
-      });
-      $("#my-calendar").zabuto_calendar({
-      action: function () {
-      return myDateFunction(this.id, false);
-      },
-      action_nav: function () {
-      return myNavFunction(this.id);
-      },
-      ajax: {
-      url: "show_data.php?action=1",
-      modal: true
-      },
-      legend: [
-      {type: "text", label: "Special event", badge: "00"},
-      {type: "block", label: "Regular event", }
-      ]
-      });
-      });
-      function myNavFunction(id) {
-      $("#date-popover").hide();
-      var nav = $("#" + id).data("navigation");
-      var to = $("#" + id).data("to");
-      console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-      }
+      }); 

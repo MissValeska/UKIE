@@ -278,6 +278,22 @@ ul.top-menu > li > .logout {
     display: inline;
 }
 
+.level-info .l-name {
+    font-size: 13px;
+}
+
+.level-info .percent {
+    display: inline-block;
+    float: right;
+    font-size: 13px;
+    font-weight: 600;
+    padding-left: 10px;
+    margin-top: -4px;
+}
+
+
+
+
 ul.sidebar-menu , ul.sidebar-menu li ul.sub{
     margin: -2px 0 0;
     padding: 0;
@@ -568,6 +584,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     padding-left: 10px;
     margin-top: -4px;
 }
+
 
 .dropdown-menu.extended .progress {
     margin-bottom: 0 !important;

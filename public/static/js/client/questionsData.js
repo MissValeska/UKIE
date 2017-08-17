@@ -92,16 +92,36 @@ function markAsCompleted(i) {
 
 }
 
-function addWordData() {
+function addWordData(word, correctCount, incorrectCount) {
 
   var currentdate = new Date();
   var datetime = currentdate.getDate() + " "
               + (currentdate.getMonth()+1)  + " "
-              + currentdate.getFullYear() + "  "
-              + currentdate.getHours() + ","
-              + currentdate.getMinutes() + ";";
-              //+ currentdate.getSeconds();
+              + currentdate.getFullYear() + ","
+              + currentdate.getHours() + ":"
+              + currentdate.getMinutes() + ":"
+              + currentdate.getSeconds();
 
+  firebase.database().ref('users/' + userData.uid + "/WordData/WordData:" + word.toLowerCase()).once('value').then(function(snapshot) {
+
+        var wordData = snapshot.val();
+        var tmp = wordData.split(":");
+        var correct = tmp[0];
+        var incorrect = tmp[1];
+        var storedWord = tmp[2];
+        if(tmp.length == 4) {
+          var date = tmp[3];
+        }
+        else if(tmp.length == 5) {
+          var date = tmp[3];
+          date += tmp[4];
+        }
+
+        firebase.database().ref('users/' + userData.uid + "/WordData").update({
+          "WordData:"+word: correctCount + 1
+        });
+
+  });
 }
 
 function addCorrect() {

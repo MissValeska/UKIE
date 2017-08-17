@@ -117,57 +117,21 @@ html(lang='en')
             //- // settings end
             // inbox dropdown start
             li#header_inbox_bar.dropdown
-              a.dropdown-toggle(data-toggle='dropdown', href='index.html#')
+              a.dropdown-toggle(data-toggle='dropdown', href='index#')
                 i.fa.fa-users
-                span.badge.bg-theme03 5
-              ul.dropdown-menu.extended.inbox
+                span#totalfriendcount.badge.bg-theme03 5
+              ul#friendbox.dropdown-menu.extended.inbox
                 .notify-arrow.notify-arrow-green
                 li
-                  p.green You have 5 friends
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-zac.jpg')
-                    span.subject
-                      span.from Zac Snider
-                      span.time Just now
-                    span.message
-                      | Wants to connect with you
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-divya.jpg')
-                    span.subject
-                      span.from Divya Manian
-                      span.time 40 mins.
-                    span.message
-                      | Completed Alphabet Module
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-danro.jpg')
-                    span.subject
-                      span.from Dan Rogers
-                      span.time 2 hrs.
-                    span.message
-                      | Reached Level 5
-                li
-                  a(href='index.html#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-sherman.jpg')
-                    span.subject
-                      span.from Dj Sherman
-                      span.time 4 hrs.
-                    span.message
-                      | Joined Ukie
-                li
-                  a(href='/friends') See all friends
+                  p#friendnum.green You have 5 friends
             // inbox dropdown end
+            script.
+              getFriends();
           // notification end
         .top-menu
           ul.nav.pull-right.top-menu
             li
-              a#logout.logout(href='login.html') Logout
+              a#logout.logout(href='login') Logout
               script.
                 $('#logout').click(function(e) {
                   e.preventDefault();

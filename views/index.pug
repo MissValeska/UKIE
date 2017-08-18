@@ -1,7 +1,15 @@
 html(lang="en")
   head
     meta(charset="utf-8")
-    |     
+    |
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.js')
+    script(type='text/javascript', src='/js/client/userData.js')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     |     
     title Ukie for Ukrainian language
@@ -24,6 +32,18 @@ html(lang="en")
     //
   |   
   body
+    script.
+      /*firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log("User img:" + user.photoURL);
+          window.location.replace("http://localhost:3000/profile");
+        } else {
+          console.log("not signed in!")
+          window.location.replace("http://localhost:3000");
+          // No user is signed in.
+        }
+      });*/
     // Navigation bar
     nav.navbar.navbar-default.navbar-fixed-top
       .container
@@ -589,13 +609,6 @@ html(lang="en")
     script(src="/js/login.js")
     |
     script(type='text/javascript', src='/js/jquery.backstretch.min.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
-    script(src='https://code.jquery.com/jquery-3.2.1.js')
-    script(type='text/javascript', src='/js/client/userData.js')
     script.
       $('#google').click(function(e) {
         e.preventDefault();

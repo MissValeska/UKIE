@@ -32,7 +32,7 @@ html(lang='en')
           console.log("User img:" + user.photoURL);
         } else {
           console.log("not signed in!")
-          window.location.replace("http://localhost:3000/login");
+          window.location.replace("http://localhost:3000");
           // No user is signed in.
         }
       });
@@ -74,66 +74,26 @@ html(lang='en')
             li#header_inbox_bar.dropdown
               a.dropdown-toggle(data-toggle='dropdown', href='/#')
                 i.fa.fa-users
-                span.badge.bg-theme03 5
-              ul.dropdown-menu.extended.inbox
+                span#totalfriendcount.badge.bg-theme03 5
+              ul#friendbox.dropdown-menu.extended.inbox
                 .notify-arrow.notify-arrow-green
                 li
-                  p.green You have #{friends} friends
-                  
-                  //https://pugjs.org/language/case.html
-                  
-                  
-                li
-                  a(href='/#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-zac.jpg')
-                    span.subject
-                      span.from Zac Snider
-                      span.time Just now
-                    span.message
-                      | Wants to connect with you
-                li
-                  a(href='/#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-divya.jpg')
-                    span.subject
-                      span.from Divya Manian
-                      span.time 40 mins.
-                    span.message
-                      | Completed Alphabet Module
-                li
-                  a(href='/#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-danro.jpg')
-                    span.subject
-                      span.from Dan Rogers
-                      span.time 2 hrs.
-                    span.message
-                      | Reached Level 5
-                li
-                  a(href='/#')
-                    span.photo
-                      img(alt='avatar', src='img/ui-sherman.jpg')
-                    span.subject
-                      span.from Dj Sherman
-                      span.time 4 hrs.
-                    span.message
-                      | Joined Ukie
-                li
-                  a(href='/friends') See all friends
+                  p#friendnum.green You have 5 friends
             // inbox dropdown end
+            script.
+              getFriends();
           // notification end
         .top-menu
           ul.nav.pull-right.top-menu
             li
-              a#logout.logout(href='login.html') Logout
+              a#logout.logout(href='/') Logout
               script.
                 $('#logout').click(function(e) {
                   e.preventDefault();
                   firebase.auth().signOut().then(function() {
                     // Sign-out successful.
                     console.log("Successful signout!");
-                    window.location.replace("http://localhost:3000/login");
+                    window.location.replace("http://localhost:3000");
                     }).catch(function(error) {
                       console.log("Signout unsuccessful");
                     // An error happened.
@@ -157,22 +117,25 @@ html(lang='en')
                   getProfileUrl();
                   getUsername();
               li
-                a.no-padding(href='level.html')
+                a.no-padding(href='level')
                   .level-info
-                    .l-name.centered Townswoman
+                    #leveltitle.l-name.centered Townswoman
                   //- .percent 40%
                 .progress.progress-striped.no-margin
-                  .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
-                    span.sr-only 40% Complete (success)
+                  #levelprogdata.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%')
+                    span#levelprog.sr-only 40% Complete (success)
                 .progress-info.mb
                   .pull-left
                     h5
-                      i.fa.fa-bolt
-                        |  Lvl 2
-                  .pull-right
-                    h5 125/280
+                      i#levelnum.fa.fa-bolt
+                        //|  Lvl 2
+                  
+                  #xpstuff.pull-right
+                    //h5 125/280
+                script.
+                  getUserLevel();
             li.mt
-              a.active(href='index')
+              a.active(href='profile')
                 i.fa.fa-dashboard
                 span Dashboard
             li.sub-menu

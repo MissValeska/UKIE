@@ -64,6 +64,55 @@ function getFriends() {
 
 }
 
+function getUserLevel() {
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log("Username:" + user.displayName);
+      userData = user;
+
+      firebase.database().ref('users/' + userData.uid).once('value').then(function(snapshot) {
+
+        var XP = snapshot.val().XP;
+        var Level = snapshot.val().Level;
+        console.log("Level:" + Level);
+        try {
+          firebase.database().ref('Levels/' + "Level" + (Level + 1)).once('value').then(function(snapshot) {
+
+            var XPNeeded = snapshot.val().XP;
+            var title = snapshot.val().title;
+            var url = snapshot.val().url;
+
+            var prog = Math.round(((XP/XPNeeded)*100));
+            console.log("Prog:" + prog);
+
+            var h5 = document.createElement("h5");
+            h5.innerHTML = XP + "/" + XPNeeded;
+            document.getElementById("levelnum").innerHTML = " Lvl " + Level;
+            document.getElementById("xpstuff").appendChild(h5);
+            document.getElementById("levelprog").innerHTML = prog + "% Complete (success)";
+            document.getElementById("leveltitle").innerHTML = title;
+            document.getElementById("levelprogdata").setAttribute("aria-valuenow", prog);
+            document.getElementById("levelprogdata").setAttribute("style", 'width: ' + prog + "%");
+
+          });
+        }
+        catch(err) {
+          console.log(err.message);
+        }
+
+      });
+
+    } else {
+      console.log("not signed in!")
+      //login();
+      // No user is signed in.
+    }
+  });
+
+}
+
 function listFriends(snapshot, i) {
 
   //var inventoryData = getInventory();
@@ -169,7 +218,7 @@ function getInventory(i) {
         console.log("InNum:" + snapshot.val().InNum);
         if(i != LIST) {
           document.getElementById("itemnum").innerHTML = "You have " + snapshot.val().TotalNum + " items in your inventory";
-          document.getElementById("totalcount").innerHTML = snapshot.val().TotalNum;
+          document.getElementById("totalcount").innerHTML = snapshot.val().InNum;
         }
         else if(i == LIST) {
           listInventoryItems(snapshot);

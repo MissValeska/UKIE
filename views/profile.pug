@@ -32,7 +32,7 @@ html(lang='en')
           console.log("User img:" + user.photoURL);
         } else {
           console.log("not signed in!")
-          window.location.replace("http://localhost:3000/login");
+          window.location.replace("http://localhost:3000");
           // No user is signed in.
         }
       });
@@ -86,14 +86,14 @@ html(lang='en')
         .top-menu
           ul.nav.pull-right.top-menu
             li
-              a#logout.logout(href='login') Logout
+              a#logout.logout(href='/') Logout
               script.
                 $('#logout').click(function(e) {
                   e.preventDefault();
                   firebase.auth().signOut().then(function() {
                     // Sign-out successful.
                     console.log("Successful signout!");
-                    window.location.replace("http://localhost:3000/login");
+                    window.location.replace("http://localhost:3000");
                     }).catch(function(error) {
                       console.log("Signout unsuccessful");
                     // An error happened.
@@ -117,22 +117,25 @@ html(lang='en')
                   getProfileUrl();
                   getUsername();
               li
-                a.no-padding(href='level.html')
+                a.no-padding(href='level')
                   .level-info
-                    .l-name.centered Townswoman
+                    #leveltitle.l-name.centered Townswoman
                   //- .percent 40%
                 .progress.progress-striped.no-margin
-                  .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
-                    span.sr-only 40% Complete (success)
+                  #levelprogdata.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%')
+                    span#levelprog.sr-only 40% Complete (success)
                 .progress-info.mb
                   .pull-left
                     h5
-                      i.fa.fa-bolt
-                        |  Lvl 2
-                  .pull-right
-                    h5 125/280
+                      i#levelnum.fa.fa-bolt
+                        //|  Lvl 2
+                  
+                  #xpstuff.pull-right
+                    //h5 125/280
+                script.
+                  getUserLevel();
             li.mt
-              a.active(href='index')
+              a.active(href='profile')
                 i.fa.fa-dashboard
                 span Dashboard
             li.sub-menu

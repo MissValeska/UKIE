@@ -74,6 +74,7 @@ function getUserLevel() {
 
       firebase.database().ref('users/' + userData.uid).once('value').then(function(snapshot) {
 
+        // !! Check if zero
         var XP = snapshot.val().XP;
         var Level = snapshot.val().Level;
         console.log("Level:" + Level);

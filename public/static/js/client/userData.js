@@ -105,6 +105,7 @@ function getUserLevel() {
         }
         catch(err) {
           console.log(err.message);
+          document.getElementById("levelnum").remove();
         }
 
       });

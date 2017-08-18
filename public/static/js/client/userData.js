@@ -75,29 +75,33 @@ function getUserLevel() {
       firebase.database().ref('users/' + userData.uid).once('value').then(function(snapshot) {
 
         // !! Check if zero
-        var XP = snapshot.val().XP;
-        var Level = snapshot.val().Level;
-        console.log("Level:" + Level);
         try {
-          firebase.database().ref('Levels/' + "Level" + (Level + 1)).once('value').then(function(snapshot) {
+          var XP = snapshot.val().XP;
+          var Level = snapshot.val().Level;
+          console.log("Level:" + Level);
+            firebase.database().ref('Levels/' + "Level" + (Level + 1)).once('value').then(function(snapshot) {
 
-            var XPNeeded = snapshot.val().XP;
-            var title = snapshot.val().title;
-            var url = snapshot.val().url;
+              var XPNeeded = snapshot.val().XP;
+              var title = snapshot.val().title;
+              var url = snapshot.val().url;
+              if(Level > 0) {
+                var prog = Math.round(((XP/XPNeeded)*100));
+                console.log("Prog:" + prog);
 
-            var prog = Math.round(((XP/XPNeeded)*100));
-            console.log("Prog:" + prog);
+                var h5 = document.createElement("h5");
+                h5.innerHTML = XP + "/" + XPNeeded;
+                document.getElementById("levelnum").innerHTML = " Lvl " + Level;
+                document.getElementById("xpstuff").appendChild(h5);
+                document.getElementById("levelprog").innerHTML = prog + "% Complete (success)";
+                document.getElementById("leveltitle").innerHTML = title;
+                document.getElementById("levelprogdata").setAttribute("aria-valuenow", prog);
+                document.getElementById("levelprogdata").setAttribute("style", 'width: ' + prog + "%");
+              }
+              else {
+                document.getElementById("levelnum").remove();
+              }
 
-            var h5 = document.createElement("h5");
-            h5.innerHTML = XP + "/" + XPNeeded;
-            document.getElementById("levelnum").innerHTML = " Lvl " + Level;
-            document.getElementById("xpstuff").appendChild(h5);
-            document.getElementById("levelprog").innerHTML = prog + "% Complete (success)";
-            document.getElementById("leveltitle").innerHTML = title;
-            document.getElementById("levelprogdata").setAttribute("aria-valuenow", prog);
-            document.getElementById("levelprogdata").setAttribute("style", 'width: ' + prog + "%");
-
-          });
+            });
         }
         catch(err) {
           console.log(err.message);

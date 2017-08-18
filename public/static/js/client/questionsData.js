@@ -92,7 +92,43 @@ function markAsCompleted(i) {
 
 }
 
-function addWordData(word, correctCount, incorrectCount) {
+// !! What is grammarType?
+function addGrammarData(correctCount, incorrectCount, grammar, grammarType) {
+
+  var currentdate = new Date();
+  var datetime = currentdate.getDate() + " "
+              + (currentdate.getMonth()+1)  + " "
+              + currentdate.getFullYear() + ","
+              + currentdate.getHours() + ":"
+              + currentdate.getMinutes() + ":"
+              + currentdate.getSeconds();
+
+  firebase.database().ref('users/' + userData.uid + "/GrammarData/GrammarData:" + grammar.toLowerCase()).once('value').then(function(snapshot) {
+
+        var grammarData = snapshot.val();
+        var tmp = grammarData.split(":");
+        var correct = tmp[0];
+        var incorrect = tmp[1];
+        var storedGrammar = tmp[2];
+        /*var date;
+        if(tmp.length == 4) {
+          date = tmp[3];
+        }
+        else if(tmp.length == 5) {
+          date = tmp[3];
+          date += tmp[4];
+        }*/
+
+        var obj = {GrammarData: (correct + correctCount) + ":" + (incorrect + incorrectCount) + ":" + grammar.toLowerCase() + ":" + datetime};
+
+        Object.defineProperty(obj, "GrammarData:" + grammar.toLowerCase(), Object.getOwnPropertyDescriptor(obj, "GrammarData"));
+
+        firebase.database().ref('users/' + userData.uid + "/GrammarData").update(obj);
+
+  });
+}
+
+function addWordData(correctCount, incorrectCount, word) {
 
   var currentdate = new Date();
   var datetime = currentdate.getDate() + " "
@@ -109,17 +145,20 @@ function addWordData(word, correctCount, incorrectCount) {
         var correct = tmp[0];
         var incorrect = tmp[1];
         var storedWord = tmp[2];
+        /*var date;
         if(tmp.length == 4) {
-          var date = tmp[3];
+          date = tmp[3];
         }
         else if(tmp.length == 5) {
-          var date = tmp[3];
+          date = tmp[3];
           date += tmp[4];
-        }
+        }*/
 
-        firebase.database().ref('users/' + userData.uid + "/WordData").update({
-          "WordData:"+word: correctCount + 1
-        });
+        var obj = {WordData: (correct + correctCount) + ":" + (incorrect + incorrectCount) + ":" + word.toLowerCase() + ":" + datetime};
+
+        Object.defineProperty(obj, "WordData:" + word.toLowerCase(), Object.getOwnPropertyDescriptor(obj, "WordData"));
+
+        firebase.database().ref('users/' + userData.uid + "/WordData").update(obj);
 
   });
 }
@@ -167,7 +206,7 @@ function addIncorrect() {
 const RADIO = 0;
 const DROPDOWN = 1;
 
-function submitBtnClicked(correctText, correctAnswer, i) {
+function submitBtnClicked(correctText, correctAnswer, i, isWord, isGrammar, word, grammar, grammarType) {
 
   $('#nextBtn').click(function(e){
     e.preventDefault();
@@ -209,10 +248,22 @@ function submitBtnClicked(correctText, correctAnswer, i) {
         console.log("You're correct!");
         document.getElementById('nextBtn').innerHTML = 'Next';
         addCorrect();
+        if(isWord) {
+          addWordData(1, 0, word);
+        }
+        if(isGrammar) {
+          addGrammarData(1, 0, grammar, grammarType);
+        }
       }
       else {
         console.log("Incorrect, please try again.");
         addIncorrect();
+        if(isWord) {
+          addWordData(0, 1, word);
+        }
+        if(isGrammar) {
+          addGrammarData(0, 1, grammar, grammarType);
+        }
       }
   }
     //saveProfileData(totalData);
@@ -230,6 +281,28 @@ function getdropdownData(num, snapshot) {
   var dropDown2 = snapshot.child("Question" + i).val().dropDown2;
   var questionText1 = snapshot.child("Question" + i).val().questionText1;
   var type = snapshot.child("Question" + i).val().type;
+
+  var isWord = false;
+  var word;
+  var isGrammar = false;
+  var grammar;
+  var grammarType;
+
+  try {
+    isWord = snapshot.child("Question" + i).val().isWord;
+    word = snapshot.child("Question" + i).val().word;
+  }
+  catch(err) {
+    console.log(err.message);
+  }
+  try {
+    isGrammar = snapshot.child("Question" + i).val().isGrammar;
+    grammar = snapshot.child("Question" + i).val().grammar;
+    grammarType = snapshot.child("Question" + i).val().grammarType;
+  }
+  catch(err) {
+    console.log(err.message);
+  }
   /*var radioAudio = snapshot.child("Question" + i).val().radioAudio;
   var letter = snapshot.child("Question" + i).val().letter;
   var isWord = snapshot.child("Question" + i).val().isWord;*/
@@ -336,7 +409,7 @@ function getdropdownData(num, snapshot) {
   document.getElementById("dataDiv").appendChild(submitbtn);
   // ...
 
-  submitBtnClicked(correctText, correctAnswer, DROPDOWN);
+  submitBtnClicked(correctText, correctAnswer, DROPDOWN, isWord, isGrammar, word, grammar, grammarType);
 
 }
 
@@ -352,7 +425,29 @@ function getRadioQuestionsData(num, snapshot) {
           var type = snapshot.child("Question" + i).val().type;
           var radioAudio = snapshot.child("Question" + i).val().radioAudio;
           var letter = snapshot.child("Question" + i).val().letter;
-          var isWord = snapshot.child("Question" + i).val().isWord;
+          //var isWord = snapshot.child("Question" + i).val().isWord;
+
+          var isWord = false;
+          var word;
+          var isGrammar = false;
+          var grammar;
+          var grammarType;
+
+          try {
+            isWord = snapshot.child("Question" + i).val().isWord;
+            word = snapshot.child("Question" + i).val().word;
+          }
+          catch(err) {
+            console.log(err.message);
+          }
+          try {
+            isGrammar = snapshot.child("Question" + i).val().isGrammar;
+            grammar = snapshot.child("Question" + i).val().grammar;
+            grammarType = snapshot.child("Question" + i).val().grammarType;
+          }
+          catch(err) {
+            console.log(err.message);
+          }
 
           if(type.includes("radio") == false) {
             console.log("Not a radio question!");
@@ -434,7 +529,7 @@ function getRadioQuestionsData(num, snapshot) {
           document.getElementById("dataDiv").appendChild(submitbtn);
           // ...
 
-        submitBtnClicked(correctText, correctAnswer, RADIO);
+        submitBtnClicked(correctText, correctAnswer, RADIO, isWord, isGrammar, word, grammar, grammarType);
 
 
 }

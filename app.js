@@ -42,10 +42,6 @@ app.get('/success', function (req, res) {
 res.render('success')
 });
 
-app.get('/login', function (req, res) {
-res.render('login')
-});
-
 app.get('/profile', function (req, res) {
 res.render('profile')
 });

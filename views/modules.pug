@@ -1,23 +1,393 @@
-doctype html
-html
+html(lang='en')
   head
+    
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='UKIE - App for Learning Ukrainian Language')
+    meta(name='author', content='Gabriela Medvetska')
+    meta(name='keywords', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"Ukrainian language, Ukrainian, learning, studying, courses, Ukraine"')
+    title UKIE for Ukrainian Language
+    // Bootstrap core CSS
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css', rel='stylesheet')
+    // external css
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='/js/gritter/css/jquery.gritter.css')
+    link(rel='stylesheet', type='text/css', href='/lineicons/style.css')
+    // Custom styles for this template
+    link(href='/css/style.css', rel='stylesheet')
+    link(href='/css/style-responsive.css', rel='stylesheet')
+    script(src='js/chart-master/Chart.js')
     script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
     script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
     script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
     script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
     script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
+    script(src='https://code.jquery.com/jquery-1.11.1.js')
+    script(type='text/javascript', src='/js/client/userData.js')
     script(type='text/javascript', src='/js/client/moduleData.js')
-    style.
-      ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      }
-      li {
-      float: left;
-      }
-  body
-    ul#dataStore
     script.
-      getModuleData();
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log("User img:" + user.photoURL);
+        } else {
+          console.log("not signed in!")
+          window.location.replace("http://localhost:3000/login");
+          // No user is signed in.
+        }
+      });
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body
+    section#container
+      //
+        **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        ***********************************************************************************************************************************************************
+      // header start
+      header.header.black-bg
+        .sidebar-toggle-box
+          .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
+        // logo start
+        a.logo(href='/')
+          b Ukie App
+        // logo end
+        #top_menu.nav.notify-row
+          // notification start
+          ul.nav.top-menu
+            // inventory dropdown start
+            li#header_inbox_bar.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='index#')
+                i.fa.fa-tasks
+                span#totalcount.badge.bg-theme
+              ul#inventorybox.dropdown-menu.extended.inbox
+                .notify-arrow.notify-arrow-blue
+                li
+                  p#itemnum.blue
+                script.
+                  getInventory(0);
+                  getInventory(10);
+            // inventory dropdown end
+            // inbox dropdown start
+            li#header_inbox_bar.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='/#')
+                i.fa.fa-users
+                span.badge.bg-theme03 5
+              ul.dropdown-menu.extended.inbox
+                .notify-arrow.notify-arrow-green
+                li
+                  p.green You have #{friends} friends
+                  
+                  //https://pugjs.org/language/case.html
+                  
+                  
+                li
+                  a(href='/#')
+                    span.photo
+                      img(alt='avatar', src='img/ui-zac.jpg')
+                    span.subject
+                      span.from Zac Snider
+                      span.time Just now
+                    span.message
+                      | Wants to connect with you
+                li
+                  a(href='/#')
+                    span.photo
+                      img(alt='avatar', src='img/ui-divya.jpg')
+                    span.subject
+                      span.from Divya Manian
+                      span.time 40 mins.
+                    span.message
+                      | Completed Alphabet Module
+                li
+                  a(href='/#')
+                    span.photo
+                      img(alt='avatar', src='img/ui-danro.jpg')
+                    span.subject
+                      span.from Dan Rogers
+                      span.time 2 hrs.
+                    span.message
+                      | Reached Level 5
+                li
+                  a(href='/#')
+                    span.photo
+                      img(alt='avatar', src='img/ui-sherman.jpg')
+                    span.subject
+                      span.from Dj Sherman
+                      span.time 4 hrs.
+                    span.message
+                      | Joined Ukie
+                li
+                  a(href='/friends') See all friends
+            // inbox dropdown end
+          // notification end
+        .top-menu
+          ul.nav.pull-right.top-menu
+            li
+              a#logout.logout(href='login.html') Logout
+              script.
+                $('#logout').click(function(e) {
+                  e.preventDefault();
+                  firebase.auth().signOut().then(function() {
+                    // Sign-out successful.
+                    console.log("Successful signout!");
+                    window.location.replace("http://localhost:3000/login");
+                    }).catch(function(error) {
+                      console.log("Signout unsuccessful");
+                    // An error happened.
+                  });
+                });
+      // header end
+      //
+        **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        ***********************************************************************************************************************************************************
+      // sidebar start
+      aside
+        #sidebar.nav-collapse
+          // sidebar menu start
+          ul#nav-accordion.sidebar-menu
+            p.centered
+              a(href='profile')
+                img#userimg.img-circle(src='', width='60')
+            h5#username.centered
+            script.
+              getProfileUrl();
+              getUsername();
+            li.mt
+              a.active(href='index')
+                i.fa.fa-dashboard
+                span Dashboard
+            li.sub-menu
+              a#practice(href='modules')
+                i.fa.fa-graduation-cap
+                span Practice
+            li.sub-menu
+              a(href='javascript:;')
+                i.fa.fa-lightbulb-o
+                span Grammar Tips
+            li.sub-menu
+              a(href='javascript:;')
+                i.fa.fa-book
+                span Stories
+              //- ul.sub
+              //-   li
+              //-     a(href='blank.html') Blank Page
+              //-   li
+              //-     a(href='login.html') Login
+              //-   li
+              //-     a(href='lock_screen.html') Lock Screen
+            li.sub-menu
+              a(href='javascript:;')
+                i.fa.fa-star-half-o
+                span Badges
+              //- ul.sub
+              //-   li
+              //-     a(href='form_component.html') Form Components
+            li.sub-menu
+              a(href='javascript:;')
+                i.fa.fa-users
+                span Friends
+              //- ul.sub
+              //-   li
+              //-     a(href='basic_table.html') Basic Table
+              //-   li
+              //-     a(href='responsive_table.html') Responsive Table
+            li.sub-menu
+              a(href='javascript:;')
+                i.fa.fa-comments
+                span Discussions
+              //- ul.sub
+              //-   li
+              //-     a(href='morris.html') Morris
+              //-   li
+              //-     a(href='chartjs.html') Chartjs
+              li.sub-menu
+                a(href='javascript:;')
+                  i.fa.fa-cog
+                  span Settings
+              li.sub-menu
+                a(href='javascript:;')
+                  i.fa.fa-info-circle
+                  span About
+              li.sub-menu
+                a(href='javascript:;')
+                  i.fa.fa-envelope
+                  span Contact
+          // sidebar menu end
+      // sidebar end
+    //
+      **********************************************************************************************************************************************************
+      MAIN CONTENT
+      ***********************************************************************************************************************************************************
+    // main content start
+    section#main-content
+      section.wrapper
+          .col-lg-12.main-chart
+            .row.mt
+              // SERVER STATUS PANELS
+              .col-md-4.col-sm-4.mb
+                .white-panel.pn.donut-chart
+                  .white-header
+                    h5 SERVER LOAD
+                  .row
+                    .col-sm-6.col-xs-6.goleft
+                      p
+                        i.fa.fa-database
+                        |  70%
+                  canvas#serverstatus01(height='120', width='120')
+                    ul#dataStore
+                    script.
+                      getModuleData();
+              // /col-md-4
+              .col-md-4.col-sm-4.mb
+                .white-panel.pn
+                  .white-header
+                    h5 TOP PRODUCT
+                  .row
+                    .col-sm-6.col-xs-6.goleft
+                      p
+                        i.fa.fa-heart
+                        |  122
+                    .col-sm-6.col-xs-6
+                  .centered
+                    img(src='img/product.png', width='120')
+              // /col-md-4
+              .col-md-4.mb
+                // WHITE PANEL - TOP USER
+                .white-panel.pn
+                  .white-header
+                    h5 TOP USER
+                  p
+                    img.img-circle(src='img/ui-zac.jpg', width='80')
+                  p
+                    b Zac Snider
+                  .row
+                    .col-md-6
+                      p.small.mt MEMBER SINCE
+                      p 2012
+                    .col-md-6
+                      p.small.mt TOTAL SPEND
+                      p $ 47,60
+              // /col-md-4
+            // /row
+            .row
+              // TWITTER PANEL
+              .col-md-4.mb
+                .darkblue-panel.pn
+                  .darkblue-header
+                    h5 DROPBOX STATICS
+                  canvas#serverstatus02(height='120', width='120')
+                  script.
+                    var doughnutData = [
+                    {
+                    value: 60,
+                    color:"#68dff0"
+                    },
+                    {
+                    value : 40,
+                    color : "#444c57"
+                    }
+                    ];
+                    var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
+                  p April 17, 2014
+                  footer
+                    .pull-left
+                      h5
+                        i.fa.fa-hdd-o
+                        |  17 GB
+                    .pull-right
+                      h5 60% Used
+              // /col-md-4
+              .col-md-4.mb
+                // INSTAGRAM PANEL
+                .instagram-panel.pn
+                  i.fa.fa-instagram.fa-4x
+                  p
+                    | @THISISYOU
+                    br
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;5 min. ago
+                  p
+                    i.fa.fa-comment
+                    |  18 |
+                    i.fa.fa-heart
+                    |  49
+              // /col-md-4
+              .col-md-4.col-sm-4.mb
+                // REVENUE PANEL
+                .darkblue-panel.pn
+                  .darkblue-header
+                    h5 REVENUE
+                  .chart.mt
+                    .sparkline(data-type='line', data-resize='true', data-height='75', data-width='90%', data-line-width='1', data-line-color='#fff', data-spot-color='#fff', data-fill-color='', data-highlight-line-color='#fff', data-spot-radius='4', data-data='[200,135,667,333,526,996,564,123,890,464,655]')
+                  p.mt
+                    b $ 17,980
+                    br
+                    | Month Income
+              // /col-md-4
+            // /row
+            .row.mt
+              // CUSTOM CHART START
+              .border-head
+                h3 VISITS
+              .custom-bar-chart
+                ul.y-axis
+                  li
+                    span 10.000
+                  li
+                    span 8.000
+                  li
+                    span 6.000
+                  li
+                    span 4.000
+                  li
+                    span 2.000
+                  li
+                    span 0
+                .bar
+                  .title JAN
+                  .value.tooltips(data-original-title='8.500', data-toggle='tooltip', data-placement='top') 85%
+                .bar
+                  .title FEB
+                  .value.tooltips(data-original-title='5.000', data-toggle='tooltip', data-placement='top') 50%
+                .bar
+                  .title MAR
+                  .value.tooltips(data-original-title='6.000', data-toggle='tooltip', data-placement='top') 60%
+                .bar
+                  .title APR
+                  .value.tooltips(data-original-title='4.500', data-toggle='tooltip', data-placement='top') 45%
+                .bar
+                  .title MAY
+                  .value.tooltips(data-original-title='3.200', data-toggle='tooltip', data-placement='top') 32%
+                .bar
+                  .title JUN
+                  .value.tooltips(data-original-title='6.200', data-toggle='tooltip', data-placement='top') 62%
+                .bar
+                  .title JUL
+                  .value.tooltips(data-original-title='7.500', data-toggle='tooltip', data-placement='top') 75%
+              // custom chart end
+            // /row
+          // /col-lg-12 END SECTION MIDDLE
+          //
+      // main content end
+      // footer start
+      footer.site-footer
+      .text-center
+        | ©2017 Ukie. All rights reserved
+        a.go-top(href='/#')
+          i.fa.fa-angle-up
+      // footer end
+      // js placed at the end of the document so the pages load faster
+    script(src='/js/jquery.js')
+    script(src='/js/jquery-1.8.3.min.js')
+    script(src='/js/bootstrap.min.js')
+    script.include(type='text/javascript', src='js/jquery.dcjqaccordion.2.7.js')
+    script(src='/js/jquery.scrollTo.min.js')
+    script(src='//jquery.nicescroll.js', type='text/javascript')
+    script(src='/js/jquery.sparkline.js')
+    // common script for all pages
+    script(src='/js/common-scripts.js')
+    script(type='text/javascript', src='/js/gritter/js/jquery.gritter.js')
+    script(type='text/javascript', src='/js/gritter-conf.js')

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.js')
+    script(type='text/javascript', src='/js/client/freerun.js')
+  body
+    #dataStore
+      h1#questionText
+      p English Translation
+      p#sentenceUA
+      button#enBtn(type='button') Get translation
+      label#inputLabel1(for='inputText', name='inputLabel1') Hey
+      input#inputText(type='text', name='inputText')
+      label#inputLabel2(for='inputText', name='inputLabel2') Yo
+      p#wordType Word type:
+      p#definition Definition:
+      button#peekBtn(type='button') Peek
+      button#nextBtn(type='button') Check
+    script.
+      freerun();

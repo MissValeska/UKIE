@@ -64,6 +64,10 @@ app.get('/inventory', function(req, res) {
   }
 });
 
+app.get('/freerun', function(req, res) {
+  res.render('freerun')
+});
+
 app.get('/friends', function(req, res) {
   if(isLoggedin) {
     res.render('friends')

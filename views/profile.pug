@@ -1,46 +1,6 @@
-html(lang='en')
-  head
-    
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='description', content='UKIE - App for Learning Ukrainian Language')
-    meta(name='author', content='Gabriela Medvetska')
-    meta(name='keywords', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"Ukrainian language, Ukrainian, learning, studying, courses, Ukraine"')
-    title UKIE for Ukrainian Language
-    // Bootstrap core CSS
-    link(href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css', rel='stylesheet')
-    // external css
-    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet')
-    link(rel='stylesheet', type='text/css', href='/css/zabuto_calendar.css')
-    link(rel='stylesheet', type='text/css', href='/js/gritter/css/jquery.gritter.css')
-    link(rel='stylesheet', type='text/css', href='/lineicons/style.css')
-    // Custom styles for this template
-    link(href='/css/style.css', rel='stylesheet')
-    link(href='/css/style-responsive.css', rel='stylesheet')
-    script(src='js/chart-master/Chart.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
-    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
-    script(src='https://code.jquery.com/jquery-3.2.1.js')
-    script(src='https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js')
-    script(type='text/javascript', src='/js/client/userData.js')
-    script.
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          console.log("User img:" + user.photoURL);
-        } else {
-          console.log("not signed in!")
-          window.location.replace("http://localhost:3000");
-          // No user is signed in.
-        }
-      });
-    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
-    //if lt IE 9
-      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
-      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+doctype html
+html
+  include includes/head.pug
   body
     section#container
       //
@@ -237,30 +197,19 @@ html(lang='en')
               // /row mt
               .row.mt
                 // SERVER STATUS PANELS
-                .col-md-4.col-sm-4.mb
-                  .white-panel.pn.donut-chart
+                .col-md-4.good-practise
+                  .white-panel.pn
                     .white-header
-                      h5 SERVER LOAD
-                    .row
-                      .col-sm-6.col-xs-6.goleft
-                        p
-                          i.fa.fa-database
-                          |  70%
-                    canvas#serverstatus01(height='120', width='120')
-                    script.
-                      var doughnutData = [
-                      {
-                      value: 70,
-                      color:"#68dff0"
-                      },
-                      {
-                      value : 30,
-                      color : "#fdfdfd"
-                      }
-                      ];
-                      var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
+                      h5 Your Progress
+                    .progress-icons.mt
+                      i.fa.fa-check
+                      .pull-left
+                        h3 439
+                      .pull-right
+                        h3 94%
+                      p.progress-info Correct Answers
                 // /col-md-4
-                .col-md-4.col-sm-4.mb
+                .col-md-4.col-sm-4
                   .white-panel.pn
                     .white-header
                       h5 TOP PRODUCT
@@ -273,7 +222,7 @@ html(lang='en')
                     .centered
                       img(src='img/product.png', width='120')
                 // /col-md-4
-                .col-md-4.mb
+                .col-md-4
                   // WHITE PANEL - TOP USER
                   .white-panel.pn
                     .white-header
@@ -293,31 +242,16 @@ html(lang='en')
               // /row
               .row
                 // TWITTER PANEL
-                .col-md-4.mb
-                  .darkblue-panel.pn
-                    .darkblue-header
-                      h5 DROPBOX STATICS
-                    canvas#serverstatus02(height='120', width='120')
-                    script.
-                      var doughnutData = [
-                      {
-                      value: 60,
-                      color:"#68dff0"
-                      },
-                      {
-                      value : 40,
-                      color : "#444c57"
-                      }
-                      ];
-                      var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
-                    p April 17, 2014
-                    footer
+                .col-md-4.mb.more-practise
+                  .white-panel.pn
+                    hr.no-margin
+                    .progress-icons.mt
+                      i.fa.fa-check
                       .pull-left
-                        h5
-                          i.fa.fa-hdd-o
-                          |  17 GB
+                        h3 28
                       .pull-right
-                        h5 60% Used
+                        h3 6%
+                      p.progress-info Need Practice
                 // /col-md-4
                 .col-md-4.mb
                   // INSTAGRAM PANEL
@@ -391,11 +325,12 @@ html(lang='en')
             //
       // main content end
       // footer start
-      footer.site-footer
-        .text-center
-          | ©2017 Ukie. All rights reserved
-          a.go-top(href='/#')
-            i.fa.fa-angle-up
+      include includes/footer.pug
+      //- footer.site-footer
+      //-   .text-center
+      //-     | ©2017 Ukie. All rights reserved
+      //-     a.go-top(href='/#')
+      //-       i.fa.fa-angle-up
       // footer end
     // js placed at the end of the document so the pages load faster
     script(src='/js/jquery.js')
@@ -403,7 +338,7 @@ html(lang='en')
     script(src='/js/bootstrap.min.js')
     script.include(type='text/javascript', src='js/jquery.dcjqaccordion.2.7.js')
     script(src='/js/jquery.scrollTo.min.js')
-    script(src='//jquery.nicescroll.js', type='text/javascript')
+    script(src='/jquery.nicescroll.js', type='text/javascript')
     script(src='/js/jquery.sparkline.js')
     // common script for all pages
     script(src='/js/common-scripts.js')

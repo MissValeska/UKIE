@@ -1,0 +1,44 @@
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='UKIE - App for Learning Ukrainian Language')
+    meta(name='author', content='Gabriela Medvetska')
+    meta(name='keywords', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"Ukrainian language, Ukrainian, learning, studying, courses, Ukraine"')
+    title UKIE for Ukrainian Language
+    // Bootstrap core CSS
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css', rel='stylesheet')
+    // external css
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='/css/zabuto_calendar.css')
+    link(rel='stylesheet', type='text/css', href='/js/gritter/css/jquery.gritter.css')
+    link(rel='stylesheet', type='text/css', href='/lineicons/style.css')
+    // Custom styles for this template
+    link(href='/css/sidebar.css', rel='stylesheet')
+    link(href='/css/style.css', rel='stylesheet')
+    link(href='/css/footer.css', rel='stylesheet')
+    link(href='/css/style-responsive.css', rel='stylesheet')
+    script(src='js/chart-master/Chart.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js')
+    script(src='https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.js')
+    script(src='https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js')
+    script(type='text/javascript', src='/js/client/userData.js')
+    script.
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log("User img:" + user.photoURL);
+        } else {
+          console.log("not signed in!")
+          window.location.replace("http://localhost:3000");
+          // No user is signed in.
+        }
+      });
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')

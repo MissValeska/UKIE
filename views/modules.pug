@@ -25,14 +25,18 @@ html(lang='en')
     script(src='https://code.jquery.com/jquery-3.2.1.js')
     script(type='text/javascript', src='/js/client/userData.js')
     script(type='text/javascript', src='/js/client/moduleData.js')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js")
     script.
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
           console.log("User img:" + user.photoURL);
+          var socket = io.connect('http://localhost:80');
+          // consider replacing user here with true depending on preformance and network constraints
+          socket.emit("login", user);
         } else {
           console.log("not signed in!")
-          window.location.replace("http://localhost:3000/login");
+          window.location.replace("http://localhost:3000");
           // No user is signed in.
         }
       });
@@ -51,7 +55,7 @@ html(lang='en')
         .sidebar-toggle-box
           .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
         // logo start
-        a.logo(href='/')
+        a#homelink.logo(href='/')
           b Ukie App
         // logo end
         #top_menu.nav.notify-row
@@ -69,6 +73,7 @@ html(lang='en')
                 script.
                   getInventory(0);
                   getInventory(10);
+                  document.getElementById("homelink").setAttribute("href", "profile");
             // inventory dropdown end
             // inbox dropdown start
             li#header_inbox_bar.dropdown
@@ -126,19 +131,9 @@ html(lang='en')
         .top-menu
           ul.nav.pull-right.top-menu
             li
-              a#logout.logout(href='login.html') Logout
+              a#logout.logout(href='/') Logout
               script.
-                $('#logout').click(function(e) {
-                  e.preventDefault();
-                  firebase.auth().signOut().then(function() {
-                    // Sign-out successful.
-                    console.log("Successful signout!");
-                    window.location.replace("http://localhost:3000/login");
-                    }).catch(function(error) {
-                      console.log("Signout unsuccessful");
-                    // An error happened.
-                  });
-                });
+                logout();
       // header end
       //
         **********************************************************************************************************************************************************
@@ -157,7 +152,7 @@ html(lang='en')
               getProfileUrl();
               getUsername();
             li.mt
-              a.active(href='index')
+              a.active(href='profile')
                 i.fa.fa-dashboard
                 span Dashboard
             li.sub-menu

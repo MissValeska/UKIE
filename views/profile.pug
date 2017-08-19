@@ -12,7 +12,7 @@ html
         .sidebar-toggle-box
           .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
         // logo start
-        a.logo(href='/')
+        a#homelink.logo(href='/')
           b Ukie App
         // logo end
         #top_menu.nav.notify-row
@@ -31,6 +31,7 @@ html
                   $(".inventorybox").notify("Hello World");
                   getInventory(0);
                   getInventory(10);
+                  document.getElementById("homelink").setAttribute("href", "profile");
             // inventory dropdown end
             // inbox dropdown start
             li#header_inbox_bar.dropdown
@@ -50,17 +51,7 @@ html
             li
               a#logout.logout(href='/') Logout
               script.
-                $('#logout').click(function(e) {
-                  e.preventDefault();
-                  firebase.auth().signOut().then(function() {
-                    // Sign-out successful.
-                    console.log("Successful signout!");
-                    window.location.replace("http://localhost:3000");
-                    }).catch(function(error) {
-                      console.log("Signout unsuccessful");
-                    // An error happened.
-                  });
-                });
+                logout();
       // header end
       //
         **********************************************************************************************************************************************************

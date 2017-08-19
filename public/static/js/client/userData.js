@@ -17,8 +17,18 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
     console.log("Username:" + user.displayName);
     userData = user;
+    var socket = io.connect('http://localhost:80');
+    // consider replacing user here with true depending on preformance and network constraints
+    socket.emit("login", user);
+    currentPathname = window.location.pathname;
+    if(currentPathname == UKIE_ADDRESS || currentPathname == UKIE_ADDRESS + "index") {
+      window.location.replace(UKIE_ADDRESS + "profile");
+    }
   } else {
     console.log("not signed in!")
+    var socket = io.connect('http://localhost:80');
+    // consider replacing user here with true depending on preformance and network constraints
+    socket.emit("logout", user);
     //login();
     // No user is signed in.
   }
@@ -341,8 +351,26 @@ function chooseProvider(i) {
 
 }
 
-function login(provider) {
+function logout() {
+  var socket = io.connect('http://localhost:80');
+  $('#logout').click(function(e) {
+    e.preventDefault();
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      console.log("Successful signout!");
+      // consider replacing user here with true depending on preformance and network constraints
+      socket.emit("logout", user);
+      window.location.replace("http://localhost:3000/login");
+      }).catch(function(error) {
+        console.log("Signout unsuccessful");
+      // An error happened.
+    });
+  });
 
+}
+
+function login(provider) {
+var socket = io.connect('http://localhost:80');
 firebase.auth().signInWithPopup(provider).then(function(result) {
   // This gives you a Google Access Token. You can use it to access the Google API.
   var token = result.credential.accessToken;
@@ -353,6 +381,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   console.log("Token:" + token);
   console.log("User:" + user.email);
   //console.log("More email stuff:" + firebase.currentUser.displayName);
+
+  // consider replacing user here with true depending on preformance and network constraints
+  socket.emit("login", user);
 
   userData = user;
 

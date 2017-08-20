@@ -188,17 +188,26 @@ html
               // /row mt
               .row.mt
                 // SERVER STATUS PANELS
-                .col-md-4.good-practise
+                .col-md-4
                   .white-panel.pn
                     .white-header
                       h5 Your Progress
-                    .progress-icons.mt
-                      i.fa.fa-check
-                      .pull-left
-                        h3 439
-                      .pull-right
-                        h3 94%
-                      p.progress-info Correct Answers
+                    .good-practise
+                      .progress-icons.mt
+                        i.fa.fa-check
+                        .pull-left
+                          h3 439
+                        .pull-right
+                          h3 94%
+                        p.progress-info Correct Answers
+                    .more-practise
+                      .progress-icons.mt
+                        i.fa.fa-times
+                        .pull-left
+                          h3 28
+                        .pull-right
+                          h3 6%
+                        p.progress-info Need Practice
                 // /col-md-4
                 .col-md-4.col-sm-4
                   .white-panel.pn
@@ -207,8 +216,6 @@ html
                     .row
                       .col-sm-6.col-xs-6.goleft
                         p
-                          i.fa.fa-heart
-                          |  122
                       .col-sm-6.col-xs-6
                     .centered
                       img(src='img/product.png', width='120')
@@ -230,46 +237,46 @@ html
                         p.small.mt TOTAL SPEND
                         p $ 47,60
                 // /col-md-4
-              // /row
-              .row
-                // TWITTER PANEL
-                .col-md-4.mb.more-practise
-                  .white-panel.pn
-                    hr.no-margin
-                    .progress-icons.mt
-                      i.fa.fa-check
-                      .pull-left
-                        h3 28
-                      .pull-right
-                        h3 6%
-                      p.progress-info Need Practice
-                // /col-md-4
-                .col-md-4.mb
-                  // INSTAGRAM PANEL
-                  .instagram-panel.pn
-                    i.fa.fa-instagram.fa-4x
-                    p
-                      | @THISISYOU
-                      br
-                      | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;5 min. ago
-                    p
-                      i.fa.fa-comment
-                      |  18 |
-                      i.fa.fa-heart
-                      |  49
-                // /col-md-4
-                .col-md-4.col-sm-4.mb
-                  // REVENUE PANEL
-                  .darkblue-panel.pn
-                    .darkblue-header
-                      h5 REVENUE
-                    .chart.mt
-                      .sparkline(data-type='line', data-resize='true', data-height='75', data-width='90%', data-line-width='1', data-line-color='#fff', data-spot-color='#fff', data-fill-color='', data-highlight-line-color='#fff', data-spot-radius='4', data-data='[200,135,667,333,526,996,564,123,890,464,655]')
-                    p.mt
-                      b $ 17,980
-                      br
-                      | Month Income
-                // /col-md-4
+              //- // /row
+              //- .row
+              //-   // TWITTER PANEL
+              //-   .col-md-4.mb.more-practise
+              //-     .white-panel.pn
+              //-       hr.no-margin
+              //-       .progress-icons.mt
+              //-         i.fa.fa-check
+              //-         .pull-left
+              //-           h3 28
+              //-         .pull-right
+              //-           h3 6%
+              //-         p.progress-info Need Practice
+              //-   // /col-md-4
+              //-   .col-md-4.mb
+              //-     // INSTAGRAM PANEL
+              //-     .instagram-panel.pn
+              //-       i.fa.fa-instagram.fa-4x
+              //-       p
+              //-         | @THISISYOU
+              //-         br
+              //-         | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;5 min. ago
+              //-       p
+              //-         i.fa.fa-comment
+              //-         |  18 |
+              //-         i.fa.fa-heart
+              //-         |  49
+              //-   // /col-md-4
+              //-   .col-md-4.col-sm-4.mb
+              //-     // REVENUE PANEL
+              //-     .darkblue-panel.pn
+              //-       .darkblue-header
+              //-         h5 REVENUE
+              //-       .chart.mt
+              //-         .sparkline(data-type='line', data-resize='true', data-height='75', data-width='90%', data-line-width='1', data-line-color='#fff', data-spot-color='#fff', data-fill-color='', data-highlight-line-color='#fff', data-spot-radius='4', data-data='[200,135,667,333,526,996,564,123,890,464,655]')
+              //-       p.mt
+              //-         b $ 17,980
+              //-         br
+              //-         | Month Income
+              //-   // /col-md-4
               // /row
               .row.mt
                 // CUSTOM CHART START

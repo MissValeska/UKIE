@@ -795,7 +795,7 @@ PANELS CONFIGURATIONS
 /*Panel Size*/
 
 .pn {
-	height: 250px;
+	height: 400px;
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -1974,24 +1974,29 @@ label {
 	margin-top: 5px;
 	font-weight: 700;
 }
+
+.white-panel h5 {
+  font-size: 18px;
+}
+
 .white-panel .white-header {
-	background: #f4f4f4;
 	padding: 3px;
 	margin-bottom: 15px;
-	color: #c6c6c6;
+	color: #989898;
+  border-bottom: 2px solid #e6e7ec;
 }
 .white-panel .small {
 	font-size: 10px;
 	color: #ccd1d9;
 }
 
-.more-practise .white-panel i {
+.more-practise i {
 	/*color: #00AEF9;*/
   color: #d35400;
 	font-size: 6em;
 }
 
-.good-practise .white-panel i {
+.good-practise i {
 	/*color: #00AEF9;*/
   color: #2ecc71;
 	font-size: 6em;
@@ -1999,11 +2004,11 @@ label {
 
 /*Boxes Styles for more- practise*/
 .more-practise .progress-icons.mt {
-  margin-top: 75px;
+  margin-top: 25px;
 }
 
 .good-practise .progress-icons.mt {
-  margin-top: 45px;
+  margin-top: 25px;
 }
 
 .progress-icons .pull-left {
@@ -2011,12 +2016,12 @@ label {
   color: #424a5d;
 }
 
-.more-practise .progress-icons .pull-right {
+.more-practise .pull-right {
   margin: 20px 60px 0 0;
   color: #d35400;
 }
 
-.good-practise .progress-icons .pull-right {
+.good-practise .pull-right {
   margin: 20px 60px 0 0;
   color: #2ecc71;
 }
@@ -2024,7 +2029,17 @@ label {
 p.progress-info {
   margin-top: 15px;
   color: #989898;
-  font-size: 18px;
+  font-size: 14px;
+}
+
+/*divider*/
+.good-practise p.progress-info:after {
+  content: "";
+  background-color: #c6c6c6;
+  width: 100px;
+  height: 1px;
+  margin: 40px auto 0 auto;
+  display: block;
 }
 
 

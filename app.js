@@ -2,7 +2,7 @@ const express = require('express')
 const fs = require('fs');
 var path = require('path');
 const app = express();
-var io = require('socket.io')(80);
+var io = require('socket.io')(3010);
 
 var isLoggedin = false;
 

@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
     console.log("Username:" + user.displayName);
     userData = user;
-    var socket = io.connect('http://localhost:80');
+    var socket = io.connect('http://localhost:3010');
     // consider replacing user here with true depending on preformance and network constraints
     socket.emit("login", user);
     currentPathname = window.location.pathname;
@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     }
   } else {
     console.log("not signed in!")
-    var socket = io.connect('http://localhost:80');
+    var socket = io.connect('http://localhost:3010');
     // consider replacing user here with true depending on preformance and network constraints
     socket.emit("logout", user);
     //login();
@@ -417,7 +417,7 @@ function chooseProvider(i) {
 }
 
 function logout() {
-  var socket = io.connect('http://localhost:80');
+  var socket = io.connect('http://localhost:3010');
   $('#logout').click(function(e) {
     e.preventDefault();
     firebase.auth().signOut().then(function() {
@@ -435,7 +435,7 @@ function logout() {
 }
 
 function login(provider) {
-var socket = io.connect('http://localhost:80');
+var socket = io.connect('http://localhost:3010');
 firebase.auth().signInWithPopup(provider).then(function(result) {
   // This gives you a Google Access Token. You can use it to access the Google API.
   var token = result.credential.accessToken;

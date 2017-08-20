@@ -167,7 +167,7 @@ function addCorrect() {
 
   var correctCount = 0;
 
-  firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).once('value').then(function(snapshot) {
+  firebase.database().ref('users/' + userData.uid + "/Statistics/Modules/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).once('value').then(function(snapshot) {
     try {
       correctCount = snapshot.val().correct;
       console.log("CorrectCount:" + correctCount);
@@ -176,7 +176,7 @@ function addCorrect() {
       console.log(err.message);
     }
 
-    firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).update({
+    firebase.database().ref('users/' + userData.uid + "/Statistics/Modules/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).update({
       correct: correctCount + 1
     });
 });
@@ -187,7 +187,7 @@ function addIncorrect() {
 
   var incorrectCount = 0;
 
-  firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).once('value').then(function(snapshot) {
+  firebase.database().ref('users/' + userData.uid + "/Statistics/Modules/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).once('value').then(function(snapshot) {
     try {
       incorrectCount = snapshot.val().incorrect;
       console.log("IncorrectCount:" + incorrectCount);
@@ -196,7 +196,7 @@ function addIncorrect() {
       console.log(err.message);
     }
 
-    firebase.database().ref('users/' + userData.uid + "/Statistics/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).update({
+    firebase.database().ref('users/' + userData.uid + "/Statistics/Modules/Module" + currentModule + "/Exercise" + currentExercise + "/QuestionBlock" + currentQuestionBlock + "/Question" + currentQuestion).update({
       incorrect: incorrectCount + 1
     });
 });

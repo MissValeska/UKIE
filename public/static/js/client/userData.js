@@ -46,7 +46,7 @@ function getProgress() {
           try {
             var TotalCorrectCount = snapshotData.val().TotalCorrect;
             var TotalIncorrectCount = snapshotData.val().TotalIncorrect;
-            console.log("TotalCorrectCount:" + TotalCorrectCount;
+            console.log("TotalCorrectCount:" + TotalCorrectCount);
             console.log("TotalIncorrectCount:" + TotalIncorrectCount);
             var biggest;
             document.getElementById("correctCount").innerHTML = TotalCorrectCount;

@@ -53,20 +53,20 @@ function getProgress() {
             document.getElementById("incorrectCount").innerHTML = TotalIncorrectCount;
             biggest = Math.max(TotalCorrectCount, TotalIncorrectCount);
             if(biggest == TotalCorrectCount) {
-              document.getElementById("correctPre").innerHTML = (TotalIncorrectCount/TotalCorrectCount);
-              document.getElementById("incorrectPre").innerHTML = (TotalCorrectCount/TotalIncorrectCount);
+              document.getElementById("correctPre").innerHTML = ((TotalIncorrectCount/TotalCorrectCount)*100) + "%";
+              document.getElementById("incorrectPre").innerHTML = (TotalCorrectCount/TotalIncorrectCount) + "%";
             }
             else {
-              document.getElementById("correctPre").innerHTML = (TotalCorrectCount/TotalIncorrectCount);
-              document.getElementById("incorrectPre").innerHTML = (TotalIncorrectCount/TotalCorrectCount);
+              document.getElementById("correctPre").innerHTML = ((TotalCorrectCount/TotalIncorrectCount)*100) + "%";
+              document.getElementById("incorrectPre").innerHTML = ((TotalIncorrectCount/TotalCorrectCount)*100) + "%"
             }
           }
           catch(err) {
             console.log(err.message);
             document.getElementById("correctCount").innerHTML = 0;
             document.getElementById("incorrectCount").innerHTML = 0;
-            document.getElementById("correctPre").innerHTML = 0;
-            document.getElementById("incorrectPre").innerHTML = 0;
+            document.getElementById("correctPre").innerHTML = 0 + "%";
+            document.getElementById("incorrectPre").innerHTML = 0 + "%";
             /*firebase.database().ref('users/' + userData.uid + "/Statistics").update({
               TotalCorrect: 0,
               TotalIncorrect: 0

@@ -34,6 +34,71 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+function getProgress() {
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log("Username:" + user.displayName);
+      userData = user;
+
+      firebase.database().ref('users/' + userData.uid + "/Statistics").once('value').then(function(snapshotData) {
+          try {
+            var TotalCorrectCount = snapshotData.val().TotalCorrect;
+            var TotalIncorrectCount = snapshotData.val().TotalIncorrect;
+            console.log("TotalCorrectCount:" + TotalCorrectCount;
+            console.log("TotalIncorrectCount:" + TotalIncorrectCount);
+            var biggest;
+            document.getElementById("correctCount").innerHTML = TotalCorrectCount;
+            document.getElementById("incorrectCount").innerHTML = TotalIncorrectCount;
+            biggest = Math.max(TotalCorrectCount, TotalIncorrectCount);
+            if(biggest == TotalCorrectCount) {
+              document.getElementById("correctPre").innerHTML = (TotalIncorrectCount/TotalCorrectCount);
+              document.getElementById("incorrectPre").innerHTML = (TotalCorrectCount/TotalIncorrectCount);
+            }
+            else {
+              document.getElementById("correctPre").innerHTML = (TotalCorrectCount/TotalIncorrectCount);
+              document.getElementById("incorrectPre").innerHTML = (TotalIncorrectCount/TotalCorrectCount);
+            }
+          }
+          catch(err) {
+            console.log(err.message);
+            document.getElementById("correctCount").innerHTML = 0;
+            document.getElementById("incorrectCount").innerHTML = 0;
+            document.getElementById("correctPre").innerHTML = 0;
+            document.getElementById("incorrectPre").innerHTML = 0;
+            /*firebase.database().ref('users/' + userData.uid + "/Statistics").update({
+              TotalCorrect: 0,
+              TotalIncorrect: 0
+            });*/
+          }
+          /*for(var i = 1; i <= FNum; i++) {
+            firebase.database().ref('users/' + snapshotData.child("Friend" + i).val()).once('value').then(function(snapshot) {
+                console.log("FriendXP:" + snapshot.val().XP);
+                console.log("Yo!" + i);
+                listFriends(snapshot, i);
+                console.log('Done!');
+                if(i - 1 == FNum) {
+                  console.log("HAI!");
+                  var node = document.createElement("li");
+                  var linknode = document.createElement("a");
+                  linknode.setAttribute("href", "http://127.0.0.1:3000/friends");
+                  linknode.innerHTML = "See all friends";
+                  node.appendChild(linknode);
+                  document.getElementById("friendbox").appendChild(node);
+                }
+            });
+        }*/
+      });
+    } else {
+      console.log("not signed in!")
+      //login();
+      // No user is signed in.
+    }
+  });
+
+}
+
 function getFriends() {
 
   firebase.auth().onAuthStateChanged(function(user) {

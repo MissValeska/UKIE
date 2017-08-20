@@ -86,19 +86,55 @@ function addWordData(correctCount, incorrectCount, word) {
 function addCorrect(currentQuestion) {
 
   var correctCount = 0;
+  var TotalCorrectCount = 0;
 
-  firebase.database().ref('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).once('value').then(function(snapshot) {
+  firebase.database().ref('users/' + userData.uid + "/Statistics").once('value').then(function(snapshot) {
     try {
-      correctCount = snapshot.val().correct;
+      correctCount = snapshot.child('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).val().correct;
       console.log("CorrectCount:" + correctCount);
+    }
+    catch(err) {
+      console.log(err.message);
+      correctCount = 0;
+    }
+
+    try {
+      TotalCorrectCount = snapshot.val().TotalCorrect;
+      console.log("TotalCorrectCount:" + TotalCorrectCount);
+    }
+    catch(err) {
+      console.log(err.message);
+      TotalCorrectCount = 0;
+    }
+
+    if(correctCount == Math.NaN) {
+      correctCount = 0;
+    }
+
+    if(TotalCorrectCount == Math.NaN) {
+      TotalCorrectCount = 0;
+    }
+
+    console.log("hey!" + (correctCount + 1));
+    console.log("woah!" + (TotalCorrectCount + 1));
+
+    try {
+      firebase.database().ref('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).update({
+        correct: correctCount + 1
+      });
     }
     catch(err) {
       console.log(err.message);
     }
 
-    firebase.database().ref('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).update({
-      correct: correctCount + 1
-    });
+    try {
+      firebase.database().ref('users/' + userData.uid + "/Statistics").update({
+        TotalCorrect: TotalCorrectCount + 1
+      });
+    }
+    catch(err) {
+      console.log(err.message);
+    }
 });
 
 }
@@ -106,19 +142,55 @@ function addCorrect(currentQuestion) {
 function addIncorrect(currentQuestion) {
 
   var incorrectCount = 0;
+  var TotalIncorrectCount = 0;
 
-  firebase.database().ref('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).once('value').then(function(snapshot) {
+  firebase.database().ref('users/' + userData.uid + "/Statistics").once('value').then(function(snapshot) {
     try {
-      incorrectCount = snapshot.val().incorrect;
+      incorrectCount = snapshot.child('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).val().incorrect;
       console.log("IncorrectCount:" + incorrectCount);
+    }
+    catch(err) {
+      console.log(err.message);
+      incorrectCount = 0;
+    }
+
+    try {
+      TotalIncorrectCount = snapshot.val().TotalIncorrect;
+      console.log("TotalIncorrectCount:" + TotalIncorrectCount);
+    }
+    catch(err) {
+      console.log(err.message);
+      TotalIncorrectCount = 0;
+    }
+
+    if(incorrectCount == Math.NaN) {
+      incorrectCount = 0;
+    }
+
+    if(TotalIncorrectCount == Math.NaN) {
+      TotalIncorrectCount = 0;
+    }
+
+    console.log("hey!" + (incorrectCount + 1));
+    console.log("woah!" + (TotalIncorrectCount + 1));
+
+    try {
+      firebase.database().ref('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).update({
+        incorrect: incorrectCount + 1
+      });
     }
     catch(err) {
       console.log(err.message);
     }
 
-    firebase.database().ref('users/' + userData.uid + "/Statistics/Freerun/Question" + currentQuestion).update({
-      incorrect: incorrectCount + 1
-    });
+    try {
+      firebase.database().ref('users/' + userData.uid + "/Statistics").update({
+        TotalIncorrect: TotalIncorrectCount + 1
+      });
+    }
+    catch(err) {
+      console.log(err.message);
+    }
 });
 
 }

@@ -196,18 +196,20 @@ html
                       .progress-icons.mt
                         i.fa.fa-check
                         .pull-left
-                          h3 439
+                          h3#correctCount 439
                         .pull-right
-                          h3 94%
+                          h3#correctPre 94%
                         p.progress-info Correct Answers
                     .more-practise
                       .progress-icons.mt
                         i.fa.fa-times
                         .pull-left
-                          h3 28
+                          h3#incorrectCount 28
                         .pull-right
-                          h3 6%
+                          h3#incorrectPre 6%
                         p.progress-info Need Practice
+                        script.
+                          getProgress();
                 // /col-md-4
                 .col-md-4.col-sm-4
                   .white-panel.pn

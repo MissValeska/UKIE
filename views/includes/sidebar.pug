@@ -1,0 +1,76 @@
+// sidebar start
+aside
+  #sidebar.nav-collapse
+    // sidebar menu start
+    ul#nav-accordion.sidebar-menu
+      p.centered
+        a(href='profile')
+          img#userimg.img-circle(src='', width='60')
+          h5#username.centered
+          script.
+            getProfileUrl();
+            getUsername();
+        li
+          a.no-padding(href='level')
+            .level-info
+              #leveltitle.l-name.centered Townswoman
+            //- .percent 40%
+          .progress.progress-striped.no-margin
+            #levelprogdata.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%')
+              span#levelprog.sr-only 40% Complete (success)
+          .progress-info.mb
+            .pull-left
+              h5
+                i#levelnum.fa.fa-bolt
+                  //|  Lvl 2
+            
+            #xpstuff.pull-right
+              //h5 125/280
+          script.
+            getUserLevel();
+      li.mt
+        a.active(href='profile')
+          i.fa.fa-dashboard
+          span Dashboard
+      li.sub-menu
+        a(href='glossary')
+          i.fa.fa-lightbulb-o
+          span Grammar Tips
+      li.sub-menu
+        a#practice(href='modules')
+          i.fa.fa-graduation-cap
+          span Learn
+      li.sub-menu
+        a(href='javascript:;')
+          i.fa.fa-book
+          span Stories
+        //- ul.sub
+        //-   li
+        //-     a(href='blank.html') Blank Page
+      li.sub-menu
+        a(href='javascript:;')
+          i.fa.fa-star-half-o
+          span Badges
+      li.sub-menu
+        a(href='javascript:;')
+          i.fa.fa-users
+          span Friends
+      li.sub-menu
+        a(href='javascript:;')
+          i.fa.fa-comments
+          span Discussions
+        li.sub-menu
+          a(href='javascript:;')
+            i.fa.fa-cog
+            span Settings
+        li.sub-menu
+          a(href='javascript:;')
+            i.fa.fa-info-circle
+            span About
+        li.sub-menu
+          a(href='javascript:;')
+            i.fa.fa-envelope
+            span Contact
+    // sidebar menu end
+// sidebar end
+//

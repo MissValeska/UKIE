@@ -1,0 +1,50 @@
+//
+  **********************************************************************************************************************************************************
+  TOP BAR CONTENT & NOTIFICATIONS
+  ***********************************************************************************************************************************************************
+// header start
+header.header.black-bg
+  .sidebar-toggle-box
+    .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
+  // logo start
+  a#homelink.logo(href='/')
+    b Ukie App
+  // logo end
+  #top_menu.nav.notify-row
+    // notification start
+    ul.nav.top-menu
+      // inventory dropdown start
+      li#header_inbox_bar.dropdown
+        a.dropdown-toggle(data-toggle='dropdown', href='index#')
+          i.fa.fa-tasks
+          span#totalcount.badge.bg-theme
+        ul#inventorybox.dropdown-menu.extended.inbox
+          .notify-arrow.notify-arrow-blue
+          li
+            p#itemnum.blue
+          script.
+            $(".inventorybox").notify("Hello World");
+            getInventory(0);
+            getInventory(10);
+            document.getElementById("homelink").setAttribute("href", "profile");
+      // inventory dropdown end
+      // inbox dropdown start
+      li#header_inbox_bar.dropdown
+        a.dropdown-toggle(data-toggle='dropdown', href='/#')
+          i.fa.fa-users
+          span#totalfriendcount.badge.bg-theme03 5
+        ul#friendbox.dropdown-menu.extended.inbox
+          .notify-arrow.notify-arrow-green
+          li
+            p#friendnum.green You have 5 friends
+      // inbox dropdown end
+      script.
+        getFriends();
+    // notification end
+  .top-menu
+    ul.nav.pull-right.top-menu
+      li
+        a#logout.logout(href='/') Logout
+        script.
+          logout();
+// header end

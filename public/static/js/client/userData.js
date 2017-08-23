@@ -333,9 +333,9 @@ function getUsername() {
 
 }
 
-const GOOGLE = 0;
-const FACEBOOK = 1;
-const TWITTER = 2;
+const GOOGLE_DATA = 0;
+const FACEBOOK_DATA = 1;
+const TWITTER_DATA = 2;
 
 function chooseProvider(i) {
 
@@ -343,7 +343,7 @@ function chooseProvider(i) {
 
   var valid = false;
 
-  if(i == GOOGLE) {
+  if(i == GOOGLE_DATA) {
 
     console.log("Google chosen");
 
@@ -361,7 +361,7 @@ function chooseProvider(i) {
 
   }
 
-  else if(i == FACEBOOK) {
+  else if(i == FACEBOOK_DATA) {
 
     console.log("Facebook chosen");
 
@@ -381,7 +381,7 @@ function chooseProvider(i) {
 
   }
 
-  else if(i == TWITTER) {
+  else if(i == TWITTER_DATA) {
 
     console.log("Twitter chosen");
 

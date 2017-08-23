@@ -1,5 +1,6 @@
 doctype html
 html
+  script(type='text/javascript', src='/js/client/freerun.js')
   include includes/head.pug
   body
     section#container
@@ -19,6 +20,7 @@ html
                           //- i.fa.fa-eye.peek
                           //-   | Привіт, як справи?
                   .panel-body
+                    p English Translation
                     p#sentenceEN
                     button#enBtn(type='button') Get translation
                     label#inputLabel1(for='inputText', name='inputLabel1')
@@ -29,7 +31,7 @@ html
                     button#peekBtn(type='button') Peek
                     button#nextBtn(type='button') Check
                     script.
-                        freerun();
+                      freerun();
                 
                 
                 

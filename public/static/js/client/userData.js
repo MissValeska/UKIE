@@ -1,14 +1,4 @@
 const UKIE_ADDRESS = "http://localhost:3000/";
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyBpa4RgteIADz8jvF-OkQLBwqg7a-DjIsY",
-  authDomain: "ukie-f3bcd.firebaseapp.com",
-  databaseURL: "https://ukie-f3bcd.firebaseio.com",
-  projectId: "ukie-f3bcd",
-  storageBucket: "ukie-f3bcd.appspot.com",
-  messagingSenderId: "723836520365"
-};
-firebase.initializeApp(config);
 
 var userData;
 
@@ -48,18 +38,11 @@ function getProgress() {
             var TotalIncorrectCount = snapshotData.val().TotalIncorrect;
             console.log("TotalCorrectCount:" + TotalCorrectCount);
             console.log("TotalIncorrectCount:" + TotalIncorrectCount);
-            var biggest;
             document.getElementById("correctCount").innerHTML = TotalCorrectCount;
             document.getElementById("incorrectCount").innerHTML = TotalIncorrectCount;
-            biggest = Math.max(TotalCorrectCount, TotalIncorrectCount);
-            if(biggest == TotalCorrectCount) {
-              document.getElementById("correctPre").innerHTML = ((TotalIncorrectCount/TotalCorrectCount)*100) + "%";
-              document.getElementById("incorrectPre").innerHTML = (TotalCorrectCount/TotalIncorrectCount) + "%";
-            }
-            else {
-              document.getElementById("correctPre").innerHTML = ((TotalCorrectCount/TotalIncorrectCount)*100) + "%";
-              document.getElementById("incorrectPre").innerHTML = ((TotalIncorrectCount/TotalCorrectCount)*100) + "%"
-            }
+            var total = TotalCorrectCount + TotalIncorrectCount;
+            document.getElementById("correctPre").innerHTML = Math.floor(((TotalCorrectCount/total)*100)) + "%";
+            document.getElementById("incorrectPre").innerHTML = Math.floor(((TotalIncorrectCount/total)*100)) + "%";
           }
           catch(err) {
             console.log(err.message);
@@ -173,7 +156,7 @@ function getUserLevel() {
                 document.getElementById("levelprogdata").setAttribute("style", 'width: ' + prog + "%");
               }
               else {
-                document.getElementById("levelnum").remove();
+                document.getElementById("levelnum").innerHTML = " Lvl " + 0;
               }
 
             });

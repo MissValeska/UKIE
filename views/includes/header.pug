@@ -1,3 +1,4 @@
+extends head.pug
 //
   **********************************************************************************************************************************************************
   TOP BAR CONTENT & NOTIFICATIONS
@@ -15,7 +16,7 @@ header.header.black-bg
     ul.nav.top-menu
       // inventory dropdown start
       li#header_inbox_bar.dropdown
-        a.dropdown-toggle(data-toggle='dropdown', href='index#')
+        a.dropdown-toggle(data-toggle='dropdown', href='')
           i.fa.fa-tasks
           span#totalcount.badge.bg-theme
         ul#inventorybox.dropdown-menu.extended.inbox
@@ -30,7 +31,7 @@ header.header.black-bg
       // inventory dropdown end
       // inbox dropdown start
       li#header_inbox_bar.dropdown
-        a.dropdown-toggle(data-toggle='dropdown', href='/#')
+        a.dropdown-toggle(data-toggle='dropdown', href='')
           i.fa.fa-users
           span#totalfriendcount.badge.bg-theme03 5
         ul#friendbox.dropdown-menu.extended.inbox

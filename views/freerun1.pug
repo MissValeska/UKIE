@@ -3,19 +3,60 @@ html
   include includes/head.pug
   body
     section#container
-      include includes/header.pug
-      include includes/sidebar.pug
+    include includes/header.pug
+    include includes/sidebar.pug
     section#main-content
       section.wrapper
         .row
-          //freerun card begins
-          .col-xs-12.col-md-4
-            .panel.freerun-card
-              .translation-text
-                .row
-                  h3 Привіт
-              .panel-body
+          .col-lg-12
+            .row.mt
+              //freerun card begins
+              .col-xs-12.col-md-4
+                .panel.freerun-card#dataStore
+                  .white-header.translation-text
+                    .pull-left
+                        h5#questionText
+                          //- i.fa.fa-eye.peek
+                          //-   | Привіт, як справи?
+                  .panel-body
+                    p#sentenceEN
+                    button#enBtn(type='button') Get translation
+                    label#inputLabel1(for='inputText', name='inputLabel1')
+                    input#inputText(type='text', name='inputText')
+                    label#inputLabel2(for='inputText', name='inputLabel2')
+                    p#wordType Word type:
+                    p#definition Definition:
+                    button#peekBtn(type='button') Peek
+                    button#nextBtn(type='button') Check
+                    script.
+                        freerun();
+                
+                
                 
               
                 
-            
+                //- .row.mt
+                //-   // SERVER STATUS PANELS
+                //-   .col-md-4
+                //-     .white-panel.pn
+                //-       .white-header
+                //-         h5 Your Progress
+                //-       .good-practise
+                //-         .progress-icons.mt
+                //-           i.fa.fa-check
+                //-           .pull-left
+                //-             h3#correctCount 439
+                //-           .pull-right
+                //-             h3#correctPre 94%
+                //-           p.progress-info Correct Answers
+                //-       .more-practise
+                //-         .progress-icons.mt
+                //-           i.fa.fa-times
+                //-           .pull-left
+                //-             h3#incorrectCount 28
+                //-           .pull-right
+                //-             h3#incorrectPre 6%
+                //-           p.progress-info Need Practice
+                //-           script.
+                //-             getProgress();
+                //-   // /col-md-4        

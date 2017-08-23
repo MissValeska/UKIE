@@ -14,8 +14,8 @@ html(lang='en')
     link(rel='stylesheet', type='text/css', href='/js/gritter/css/jquery.gritter.css')
     link(rel='stylesheet', type='text/css', href='/lineicons/style.css')
     // Custom styles for this template
-    link(href='/css/sidebar.css', rel='stylesheet')
     link(href='/css/style.css', rel='stylesheet')
+    link(href='/css/sidebar.css', rel='stylesheet')
     link(href='/css/footer.css', rel='stylesheet')
     link(href='/css/style-responsive.css', rel='stylesheet')
     script(src='js/chart-master/Chart.js')
@@ -28,6 +28,7 @@ html(lang='en')
     script(src='https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js')
     script(type='text/javascript', src='/js/client/userData.js')
     script(type='text/javascript', src='/js/client/moduleData.js')
+    script(type='text/javascript', src='/js/client/freerun.js')
     script.
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {

@@ -1,3 +1,5 @@
 node_modules
 .DS*
+*.DS*
 fizzbuzz.html
+public/static/js/client/firebase.js

@@ -6,18 +6,14 @@
   <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+  <script type="text/javascript" src="/js/client/stories.js"></script>
 </head>
 <body>
-<h1>Success!</h1>
-<p id="dataStore">Yo!</p>
-<script>
-firebase.database().ref('Modules').once('value').then(function(snapshot) {
-  var username = snapshot.val().ModuleNum;
-  console.log("Yo man!" + username);
-  document.getElementById('dataStore').innerHTML = "Yo man!" + username;
-  // ...
-});
-</script>
+  <div id="dataStore">
+  </div>
+  <script>
+    stories();
+  </script>
 </body>
 
 </html>

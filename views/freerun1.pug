@@ -1,11 +1,9 @@
 doctype html
 html
   script(type='text/javascript', src='/js/client/freerun.js')
-  include includes/head.pug
-  body
-    section#container
-      include includes/header.pug
-      include includes/sidebar.pug
+  include includes/layout.pug
+  block content
+    body
       section#main-content
         section.wrapper
           .row
@@ -32,11 +30,11 @@ html
                       button#nextBtn(type='button') Check
                       script.
                         freerun();
-                  
-                
-                
-              
-                
+
+
+
+
+
                 //- .row.mt
                 //-   // SERVER STATUS PANELS
                 //-   .col-md-4
@@ -61,4 +59,4 @@ html
                 //-           p.progress-info Need Practice
                 //-           script.
                 //-             getProgress();
-                //-   // /col-md-4        
+                //-   // /col-md-4
